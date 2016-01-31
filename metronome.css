@@ -1,0 +1,14 @@
+#increment_bpm {
+	padding: 100px 100px 100px 100px;
+	/*margin: 0 auto;
+	display: inline-block;*/
+}
+
+#inc_tempo {
+	float: left;
+	color: blue;
+}
+
+#dec_tempo {
+	color: red;
+}
