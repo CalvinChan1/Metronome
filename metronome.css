@@ -1,29 +1,32 @@
-#bpm {
-	background-color: teal;
-	border: none;
-	padding: 15px 35px;
-	text-align: center;
-	display: inline-block;
+#tempo_row {
 	font-size: 25px;
 	font-family: helvetica;
 	font-weight: bold;
 	color: white;
 }
 
+#bpm {
+	background-color: teal;
+	border: none;
+	padding: 15px 35px;
+	text-align: center;
+	display: inline-block;
+}
+
+#increment_bpm {
+	display: inline-block;
+}
+
 #inc_tempo {
 	padding: 15px 35px;
-	background-color: blue;
+	background-color: black;
 	display: inline-block;
 }
 
 #dec_tempo {
 	padding: 15px 35px;
-	background-color: red;
+	background-color: black;
 	display: inline-block;
-}
-
-#increment_bpm {
-	
 }
 
 .row {
