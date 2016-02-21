@@ -1,7 +1,11 @@
-#tempo_row {
+body {
 	font-size: 25px;
 	font-family: helvetica;
 	font-weight: bold;
+}
+
+/*first row*/
+#tempo_row {
 	color: white;
 }
 
@@ -29,7 +33,34 @@
 	display: inline-block;
 }
 
-.row {
-	/*display: inline-block;*/
+/*second row*/
+#tempo_slider {
+
 }
+
+/*third row*/
+#time_sig {
+	padding: 25px;
+	background-color: green;
+	font-size: 25px;
+	display: inline-block;
+}
+
+#numerator {
+	display: inline-block;
+}
+
+#denominator {
+	display: inline-block;
+}
+
+/*Fourth Row*/
+
+
+
+
+
+
+
+
 
