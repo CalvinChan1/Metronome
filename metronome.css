@@ -55,12 +55,52 @@ body {
 }
 
 /*Fourth Row*/
+#beat_subdiv {
+
+}
+
+/*Fifth Row */
+#sound_pack {
+
+}
+
+#first_beat_accent {
+	padding: 25px 15px;
+	font-size: 15px;
+	background-color: black;
+	color: white;
+	display: inline-block;
+}
 
 
+/*Sixth Row*/
+#volume_slider {
 
+}
 
+/*Seventh Row*/
+#beat_count {
+	padding: 25px 35px;
+	display: inline-block;
+}
 
+#start_button {
+	padding: 25px 55px;
+	font-size: 15px;
+	background-color: black;
+	color: white;
+	display: inline-block;
+}
 
+/*Eighth Row*/
+#timer_title {
 
+}
 
+#minutes {
+	display: inline-block;
+}
 
+#seconds {
+	display: inline-block;
+}

@@ -9,7 +9,9 @@
 
 		<link rel="stylesheet" type="text/css" href="metronome.css">
 		<script type="text/javascript" src="metronome.js"></script>
-		<script src="jquery-1.12.0.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<link href="loopj-jquery-simple-slider-71115d9/css/simple-slider.css" rel="stylesheet" type="text/css" />
+		<script src="loopj-jquery-simple-slider-71115d9/js/simple-slider.js"></script>
 <!-- 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
 	</head>
 
@@ -57,13 +59,12 @@
 			
 			<!-- Tempo Slider -->
 			<div id="tempo_slider">
-				slide me plz
+				<input type="text" data-slider="true">
 			</div>
 		</div>
 
 		<!-- Third Row (Time Signature) -->
 		<div id="third_row" class="row">
-			
 			<div id="time_sig" class="dropdown">
 				<div id="numerator">
 					4
@@ -77,7 +78,6 @@
 
 		<!-- Fourth Row (Beat Subdivision) -->
 		<div id="fourth_row" class="row">
-
 			<div id="beat_subdiv" class="dropdown">
 				beat subdivision
 				<ul>
@@ -108,10 +108,9 @@
 		<!-- Fifth Row (Sound Pack + First Beat Accent) -->
 		<div id="fifth_row" class="row">
 			
-			<div id="sound_pack">
+			<div id="sound_pack" class="dropdown">
 				sounds dropdown menu
 			</div>
-
 
 			<div id="first_beat_accent">
 				1st beat accent
@@ -122,13 +121,12 @@
 		<div id="sixth_row" class="row">
 			
 			<div id="volume_slider">
-				volume slider
+				<input type="text" data-slider="true">
 			</div>
 		</div>
 
 		<!-- Seventh Row (Beat Count & Start Button) -->
 		<div id="seventh_row" class="row">
-
 			<div id="beat_count">
 				2
 			</div>
@@ -145,13 +143,11 @@
 			</div>
 
 			<div id="minutes">
-				<div id="num_mins"></div>
-				mins
+				<div id="num_mins"><input></input> mins</div>
 			</div>
 
-			<div id="minutes">
-				<div id="num_secs"></div>
-				secs Left
+			<div id="seconds">
+				<div id="num_secs"><input></input> secs Left</div>
 			</div>
 			
 		</div>
