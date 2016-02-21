@@ -10,32 +10,28 @@
 		<link rel="stylesheet" type="text/css" href="metronome.css">
 		<script type="text/javascript" src="metronome.js"></script>
 		<script src="jquery-1.12.0.min.js"></script>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<!-- 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
 	</head>
 
 	<body>
-
-		<!-- App Name/Nav/Menu -->
+		
+		<!-- App Name/Nav/Menu -->	
 		<nav>
-
 			<!-- Title -->
 			<h2 id="title">
 				Metronome + Timer
 			</h2>
-
 			<!-- Menu Items -->
 			<div id="menu">
 
 			</div>
-
 		</nav>
 
-
 		<!-- First Row -->
-		<div id="first_row">
+		<div id="first_row" class="row">
 			<!-- Tempo -->
 			<div id="bpm">
-
+				504 bpm
 			</div>
 
 			<div id="increment_bpm">
@@ -43,7 +39,6 @@
 				<div id="inc_tempo">
 					+
 				</div>
-
 				<!-- Decrease Tempo (- sign) -->
 				<div id="dec_tempo">
 					-
@@ -52,39 +47,45 @@
 			
 			<!-- Enter Desired Tempo (Pops up empty box (New Panel)) -->
 			<div id="enter_tempo">
-				
+				<input></input>
 			</div>
 
 		</div>
 
 
 		<!-- Second Row (Tempo Slider) -->
-		<div id="second_row">
+		<div id="second_row" class="row">
 			
 			<!-- Tempo Slider -->
 			<div id="tempo_slider">
-				
+				slider
 			</div>
 		</div>
 
 		<!-- Third Row (Time Signature) -->
-		<div id="third_row">
+		<div id="third_row" class="row">
 			
 			<div id="time_sig">
-				
+				time signature
 			</div>
 		</div>
 
 		<!-- Fourth Row (Beat Subdivision) -->
-		<div id="fourth_row">
+		<div id="fourth_row" class="row">
 
-			<div id="beat_subdiv">
-				
-			</div>
+			<div id="beat_subdiv" class="dropdown">
+<!-- 				  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+				  <span class="caret"></span></button>
+				  <ul class="dropdown-menu">
+				    <li><a href="#">HTML</a></li>
+				    <li><a href="#">CSS</a></li>
+				    <li><a href="#">JavaScript</a></li>
+				  </ul>
+ -->			</div>
 		</div>
 
 		<!-- Fifth Row (Sound Pack + First Beat Accent) -->
-		<div id="fifth_row">
+		<div id="fifth_row" class="row">
 			
 			<div id="sound_pack">
 				
@@ -97,7 +98,7 @@
 		</div>
 
 		<!-- Sixth Row (Volume Slider) -->
-		<div id="sixth_row">
+		<div id="sixth_row" class="row">
 			
 			<div id="volume_slider">
 				
@@ -105,7 +106,7 @@
 		</div>
 
 		<!-- Seventh Row (Beat Count & Start Button) -->
-		<div id="seventh_row">
+		<div id="seventh_row" class="row">
 
 			<div id="beat_count">
 				
@@ -117,7 +118,7 @@
 		</div>
 
 		<!-- Eighth Row (Timer) -->
-		<div ="eighth_row">
+		<div ="eighth_row" class="row">
 			<div id="timer_title">
 				Timer
 			</div>

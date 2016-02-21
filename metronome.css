@@ -1,14 +1,32 @@
-#increment_bpm {
-	padding: 100px 100px 100px 100px;
-	/*margin: 0 auto;
-	display: inline-block;*/
+#bpm {
+	background-color: teal;
+	border: none;
+	padding: 15px 35px;
+	text-align: center;
+	display: inline-block;
+	font-size: 25px;
+	font-family: helvetica;
+	font-weight: bold;
+	color: white;
 }
 
 #inc_tempo {
-	float: left;
-	color: blue;
+	padding: 15px 35px;
+	background-color: blue;
+	display: inline-block;
 }
 
 #dec_tempo {
-	color: red;
+	padding: 15px 35px;
+	background-color: red;
+	display: inline-block;
 }
+
+#increment_bpm {
+	
+}
+
+.row {
+	/*display: inline-block;*/
+}
+
