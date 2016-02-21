@@ -2,6 +2,7 @@ body {
 	font-size: 25px;
 	font-family: helvetica;
 	font-weight: bold;
+	padding-left: 25px;
 }
 
 /*first row*/
@@ -40,10 +41,15 @@ body {
 
 /*third row*/
 #time_sig {
+	display: inline-block;
+}
+
+#time_sig_menu {
 	padding: 25px;
 	background-color: green;
 	font-size: 25px;
 	display: inline-block;
+	margin-bottom: 10px;
 }
 
 #numerator {
@@ -56,12 +62,20 @@ body {
 
 /*Fourth Row*/
 #beat_subdiv {
+	display: inline-block;
+}
 
+#beat_subdiv_menu {
+	display: inline-block;
 }
 
 /*Fifth Row */
-#sound_pack {
+#sounds {
+	display: inline-block;
+}
 
+#sound_pack {
+	display: inline-block;
 }
 
 #first_beat_accent {
@@ -74,14 +88,20 @@ body {
 
 
 /*Sixth Row*/
+#volume {
+	font-size: 20px
+}
+
 #volume_slider {
 
 }
 
 /*Seventh Row*/
 #beat_count {
-	padding: 25px 35px;
+	font-size: 40px;
+	padding: 15px 35px 5px;
 	display: inline-block;
+	text-align: center;
 }
 
 #start_button {
@@ -94,7 +114,7 @@ body {
 
 /*Eighth Row*/
 #timer_title {
-
+	font-size: 25px;
 }
 
 #minutes {
@@ -104,3 +124,18 @@ body {
 #seconds {
 	display: inline-block;
 }
+
+input {
+	width: 35px;
+}
+
+.dropdown {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.slider {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
