@@ -7,10 +7,20 @@ var metronome = {
 	sound: "clave",
 	first_beat_accent: true,
 	volume: 50,
-	timer: [2, 30],
+	// timer in seconds
+	timer: 150,
 	start: function () {
 		var on = this.on ? false : true;
 		this.on = on;
+
+		while (this.on) {
+			setTimeout(function() { 
+				// change current beat
+				this.current_beat = (this.current_beat + 1) % this.time_sig[0]
+				$("#beat_count").html(this.current_beat);
+				this.play_sound();
+			}, (bpm / 1000));
+		}
 	},
 	increment_up: function() {
 		this.bpm++;
@@ -31,6 +41,9 @@ var metronome = {
 	sound_selector: function() {
 		// clave/click/cowbell
 	},
+	play_sound: function() {
+
+	},
 	first_beat_accent: function() {
 		var first_beat_accent = this.first_beat_accent ? false : true;
 		this.first_beat_accent = first_beat_accent;
@@ -39,9 +52,9 @@ var metronome = {
 
 	},
 	current_beat_counter: function() {
-		// may not need this
+		
 	},
 	timer_input: function() {
-		
+
 	}
 }
