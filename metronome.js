@@ -1,6 +1,6 @@
 var metronome = {
 	on: false,
-	current_beat: 1,
+	current_beat: 0,
 	bpm: 100,
 	time_sig: [4, 4],
 	subdivision: "quarter",
@@ -13,13 +13,17 @@ var metronome = {
 		var on = this.on ? false : true;
 		this.on = on;
 
-		while (this.on) {
-			setTimeout(function() { 
-				// change current beat
-				this.current_beat = (this.current_beat + 1) % this.time_sig[0]
-				$("#beat_count").html(this.current_beat);
-				this.play_sound();
-			}, (bpm / 1000));
+		if (this.on) {
+			var starting = setInterval(function() { 
+					// change current beat
+					metronome.current_beat = (metronome.current_beat + 1) % (metronome.time_sig[0])
+					$("#beat_count").html(metronome.current_beat + 1);
+					// this.play_sound();
+			}, (60000 / metronome.bpm))
+			$("#start_button").html("Stop");
+		} else {
+			clearTimeout(starting);
+			$("#start_button").html("Start");
 		}
 	},
 	increment_up: function() {
@@ -42,7 +46,11 @@ var metronome = {
 		// clave/click/cowbell
 	},
 	play_sound: function() {
-
+		if (this.first_beat_accent && this.current_beat === 1) {
+			// higher pitched sound
+		} else {
+			// lower pitched sound
+		}
 	},
 	first_beat_accent: function() {
 		var first_beat_accent = this.first_beat_accent ? false : true;
@@ -58,3 +66,9 @@ var metronome = {
 
 	}
 }
+
+$(document).ready(function() {
+	$("#start_button").click(function() {
+		metronome.start();
+	})
+})
