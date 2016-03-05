@@ -9,11 +9,11 @@ body {
 	padding-left: 16px;
 }
 
-.button:active {
+/*.button:active {
 	border-style: solid;
 	border-color: gray;
 	border-width: 2px;
-}
+}*/
 
 /*first row*/
 #tempo_row {

@@ -1,7 +1,7 @@
 var metronome = {
 	on: false,
 	current_beat: 0,
-	bpm: 100,
+	bpm: 200,
 	time_sig: [4, 4],
 	subdivision: "quarter",
 	sound: "clave",
@@ -9,28 +9,51 @@ var metronome = {
 	volume: 50,
 	// timer in seconds
 	timer: 150,
+	clicks: false,
 	start: function () {
-		var on = this.on ? false : true;
-		this.on = on;
+		this.on = this.on ? false : true;
 
 		if (this.on) {
-			var starting = setInterval(function() { 
-					// change current beat
-					metronome.current_beat = (metronome.current_beat + 1) % (metronome.time_sig[0])
-					$("#beat_count").html(metronome.current_beat + 1);
-					// this.play_sound();
-			}, (60000 / metronome.bpm))
+			clearInterval(this.clicks);
+
+			this.reset_current_beat();
+			this.initate_click();
+
 			$("#start_button").html("Stop");
 		} else {
-			clearTimeout(starting);
+			clearInterval(this.clicks);
+
+			this.reset_current_beat();
+			
 			$("#start_button").html("Start");
+		}
+	},
+	initate_click: function() {
+		if (this.on) {
+			this.clicks = setInterval(function() {
+				// change current beat
+				metronome.current_beat = (metronome.current_beat + 1) % (metronome.time_sig[0])
+				$("#beat_count").html(metronome.current_beat + 1);
+				
+				// this.play_sound();
+			}, (60000 / metronome.bpm))
 		}
 	},
 	increment_up: function() {
 		this.bpm++;
+
+		clearInterval(this.clicks);
+
+		this.reset_current_beat();
+		this.initate_click();
 	},
 	increment_down: function() {
 		this.bpm--;
+
+		clearInterval(this.clicks);
+
+		this.reset_current_beat();
+		this.initate_click();
 	},
 	slider_logic: function() {
 		//////
@@ -45,6 +68,10 @@ var metronome = {
 	sound_selector: function() {
 		// clave/click/cowbell
 	},
+	reset_current_beat: function() {
+		this.current_beat = 0;
+		$("#beat_count").html("1");
+	},
 	play_sound: function() {
 		if (this.first_beat_accent && this.current_beat === 1) {
 			// higher pitched sound
@@ -53,8 +80,7 @@ var metronome = {
 		}
 	},
 	first_beat_accent: function() {
-		var first_beat_accent = this.first_beat_accent ? false : true;
-		this.first_beat_accent = first_beat_accent;
+		this.first_beat_accent = this.first_beat_accent ? false : true;
 	},
 	volume_level_slider: function() {
 
