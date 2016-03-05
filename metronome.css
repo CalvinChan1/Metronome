@@ -2,7 +2,17 @@ body {
 	font-size: 25px;
 	font-family: helvetica;
 	font-weight: bold;
-	padding-left: 25px;
+	padding-left: 30px;
+}
+
+#metronome {
+	padding-left: 16px;
+}
+
+.button:active {
+	border-style: solid;
+	border-color: gray;
+	border-width: 2px;
 }
 
 /*first row*/

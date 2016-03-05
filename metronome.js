@@ -71,4 +71,14 @@ $(document).ready(function() {
 	$("#start_button").click(function() {
 		metronome.start();
 	})
+
+	$("#inc_tempo").click(function() {
+		metronome.increment_up();
+		$("#bpm").html(metronome.bpm + " bpm");
+	})
+
+	$("#dec_tempo").click(function() {
+		metronome.increment_down();
+		$("#bpm").html(metronome.bpm + " bpm");
+	})
 })

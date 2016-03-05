@@ -35,157 +35,161 @@
 			</div>
 		</nav>
 
-		<!-- First Row -->
-		<div id="tempo_row" class="row">
-			<!-- Tempo -->
-			<div id="bpm">
-				104 bpm
-			</div>
-			<div id="increment_bpm">
-				<!-- Increase Tempo (+ sign) -->
-				<div id="inc_tempo">
-					+
+		<div id="metronome">
+			<!-- First Row -->
+			<div id="tempo_row" class="row">
+				<!-- Tempo -->
+				<div id="bpm">
+					100 bpm
 				</div>
-				<!-- Decrease Tempo (- sign) -->
-				<div id="dec_tempo">
-					-
-				</div>	
+				<div id="increment_bpm" class="button">
+					<!-- Increase Tempo (+ sign) -->
+					<div id="inc_tempo">
+						+
+					</div>
+					<!-- Decrease Tempo (- sign) -->
+					<div id="dec_tempo" class="button">
+						-
+					</div>	
+				</div>
+
+				<!-- Enter Desired Tempo (Pops up empty box (New Panel)) -->
+				<!-- <div id="enter_tempo">
+					<input></input>
+				</div> -->
+
 			</div>
 
-			<!-- Enter Desired Tempo (Pops up empty box (New Panel)) -->
-			<!-- <div id="enter_tempo">
-				<input></input>
-			</div> -->
 
-		</div>
-
-
-		<!-- Second Row (Tempo Slider) -->
-		<div id="second_row" class="row">
-			
-			<!-- Tempo Slider -->
-			<div id="tempo_slider" class="slider">
-				<input type="text" data-slider="true">
+			<!-- Second Row (Tempo Slider) -->
+			<div id="second_row" class="row">
+				
+				<!-- Tempo Slider -->
+				<div id="tempo_slider" class="slider">
+					<input type="text" data-slider="true">
+				</div>
 			</div>
-		</div>
 
-		<!-- Third Row (Time Signature) -->
-		<div id="third_row" class="row">
-			<div id="time_sig">
-				Time Signature
+			<!-- Third Row (Time Signature) -->
+			<div id="third_row" class="row">
+				<div id="time_sig">
+					Time Signature
+				</div>
+				<div id="time_sig_menu">
+					<div id="numerator" class="dropdown">
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">4
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+						  	<li><a href="#">1</a></li>
+						  	<li><a href="#">2</a></li>
+						  	<li><a href="#">3</a></li>
+						  	<li><a href="#">4</a></li>
+						  	<li><a href="#">5</a></li>
+						  	<li><a href="#">6</a></li>
+						  	<li><a href="#">7</a></li>
+						  	<li><a href="#">8</a></li>
+						  	<li><a href="#">9</a></li>
+						  	<li><a href="#">10</a></li>
+						  	<li><a href="#">11</a></li>
+						  	<li><a href="#">12</a></li>
+						  	<li><a href="#">13</a></li>
+						  	<li><a href="#">14</a></li>
+						  	<li><a href="#">15</a></li>
+						  	<li><a href="#">16</a></li>
+						  	<li><a href="#">17</a></li>
+						  	<li><a href="#">18</a></li>
+						</ul>
+					</div>
+					/
+					<div id="denominator" class="dropdown">
+						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">4
+						<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+					  	<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">6</a></li>
+						<li><a href="#">8</a></li>
+						<li><a href="#">16</a></li>
+						<li><a href="#">32</a></li>
+					</ul>
+					</div>
+				</div>
 			</div>
-			<div id="time_sig_menu">
-				<div id="numerator" class="dropdown">
-					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">4
+
+			<!-- Fourth Row (Beat Subdivision) -->
+			<div id="fourth_row" class="row">
+				<div id="beat_subdiv">Beat Subdivision</div>
+				<div id="beat_subdiv_menu" class="dropdown">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Beat Subdivision
 					<span class="caret"></span></button>
 					<ul class="dropdown-menu">
-					  	<li><a href="#">1</a></li>
-					  	<li><a href="#">2</a></li>
-					  	<li><a href="#">3</a></li>
-					  	<li><a href="#">4</a></li>
-					  	<li><a href="#">5</a></li>
-					  	<li><a href="#">6</a></li>
-					  	<li><a href="#">7</a></li>
-					  	<li><a href="#">8</a></li>
-					  	<li><a href="#">9</a></li>
-					  	<li><a href="#">10</a></li>
-					  	<li><a href="#">11</a></li>
-					  	<li><a href="#">12</a></li>
-					  	<li><a href="#">13</a></li>
-					  	<li><a href="#">14</a></li>
-					  	<li><a href="#">15</a></li>
-					  	<li><a href="#">16</a></li>
-					  	<li><a href="#">17</a></li>
-					  	<li><a href="#">18</a></li>
+					  	<li><a href="#">Quarter Notes</a></li>
+					  	<li><a href="#">8th Notes</a></li>
+					  	<li><a href="#">8th Note Triplets</a></li>
+					  	<li><a href="#">16th Notes</a></li>
+					  	<li><a href="#">16th Note Triplets</a></li>
+					  	<li><a href="#">32nd Notes</a></li>
+					  	<li><a href="#">Whole Notes</a></li>
+					  	<li><a href="#">Half Notes</a></li>
+					  	<li><a href="#">Quintuplets</a></li>
+					  	<li><a href="#">Septuplets</a></li>
 					</ul>
 				</div>
-				/
-				<div id="denominator" class="dropdown">
-					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">4
+			</div>
+
+			<!-- Fifth Row (Sound Pack + First Beat Accent) -->
+			<div id="fifth_row" class="row">
+				<div id="sounds">Sounds</div>
+
+				<div id="sound_pack" class="dropdown">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sounds
 					<span class="caret"></span></button>
 					<ul class="dropdown-menu">
-				  	<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">6</a></li>
-					<li><a href="#">8</a></li>
-					<li><a href="#">16</a></li>
-					<li><a href="#">32</a></li>
-				</ul>
+						<li><a href="#">Clave</a></li>
+					  	<li><a href="#">Click</a></li>
+						<li><a href="#">Cowbell</a></li>
+					</ul>
+				</div>
+
+				<div id="first_beat_accent" class="button">
+					1st beat accent
+				</div>		
+			</div>
+
+			<!-- Sixth Row (Volume Slider) -->
+			<div id="sixth_row" class="row">
+				<div id="volume">Volume</div>
+				<div id="volume_slider" class="slider">
+					<input type="text" data-slider="true">
 				</div>
 			</div>
-		</div>
 
-		<!-- Fourth Row (Beat Subdivision) -->
-		<div id="fourth_row" class="row">
-			<div id="beat_subdiv">Beat Subdivision</div>
-			<div id="beat_subdiv_menu" class="dropdown">
-				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Beat Subdivision
-				<span class="caret"></span></button>
-				<ul class="dropdown-menu">
-				  	<li><a href="#">Quarter Notes</a></li>
-				  	<li><a href="#">8th Notes</a></li>
-				  	<li><a href="#">8th Note Triplets</a></li>
-				  	<li><a href="#">16th Notes</a></li>
-				  	<li><a href="#">16th Note Triplets</a></li>
-				  	<li><a href="#">32nd Notes</a></li>
-				  	<li><a href="#">Whole Notes</a></li>
-				  	<li><a href="#">Half Notes</a></li>
-				  	<li><a href="#">Quintuplets</a></li>
-				  	<li><a href="#">Septuplets</a></li>
-				</ul>
-			</div>
-		</div>
+			<!-- Seventh Row (Beat Count & Start Button) -->
+			<div id="seventh_row" class="row">
+				<div id="beat_count">
+					2
+				</div>
 
-		<!-- Fifth Row (Sound Pack + First Beat Accent) -->
-		<div id="fifth_row" class="row">
-			<div id="sounds">Sounds</div>
-
-			<div id="sound_pack" class="dropdown">
-				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sounds
-				<span class="caret"></span></button>
-				<ul class="dropdown-menu">
-					<li><a href="#">Clave</a></li>
-				  	<li><a href="#">Click</a></li>
-					<li><a href="#">Cowbell</a></li>
-				</ul>
+				<div id="start_button" class="button">
+					Start
+				</div>
 			</div>
 
-			<div id="first_beat_accent">1st beat accent</div>		
-		</div>
+			<!-- Eighth Row (Timer) -->
+			<div ="eighth_row" class="row">
+				<div id="timer_title">Timer</div>
 
-		<!-- Sixth Row (Volume Slider) -->
-		<div id="sixth_row" class="row">
-			<div id="volume">Volume</div>
-			<div id="volume_slider" class="slider">
-				<input type="text" data-slider="true">
+				<div id="minutes">
+					<div id="num_mins"><input></input> mins</div>
+				</div>
+
+				<div id="seconds">
+					<div id="num_secs"><input></input> secs Left</div>
+				</div>
+				
 			</div>
-		</div>
-
-		<!-- Seventh Row (Beat Count & Start Button) -->
-		<div id="seventh_row" class="row">
-			<div id="beat_count">
-				2
-			</div>
-
-			<div id="start_button">
-				Start
-			</div>
-		</div>
-
-		<!-- Eighth Row (Timer) -->
-		<div ="eighth_row" class="row">
-			<div id="timer_title">Timer</div>
-
-			<div id="minutes">
-				<div id="num_mins"><input></input> mins</div>
-			</div>
-
-			<div id="seconds">
-				<div id="num_secs"><input></input> secs Left</div>
-			</div>
-			
 		</div>
 
 	</body>
