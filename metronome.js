@@ -34,21 +34,13 @@ var metronome = {
 				// change current beat
 				metronome.current_beat = (metronome.current_beat + 1) % (metronome.time_sig[0])
 				$("#beat_count").html(metronome.current_beat + 1);
-				
+
 				// this.play_sound();
 			}, (60000 / metronome.bpm))
 		}
 	},
-	increment_up: function() {
-		this.bpm++;
-
-		clearInterval(this.clicks);
-
-		this.reset_current_beat();
-		this.initate_click();
-	},
-	increment_down: function() {
-		this.bpm--;
+	increment_bpm: function (adjustBpm) {
+		(adjustBpm === "inc") ? this.bpm++ : this.bpm--;
 
 		clearInterval(this.clicks);
 
@@ -73,7 +65,7 @@ var metronome = {
 		$("#beat_count").html("1");
 	},
 	play_sound: function() {
-		if (this.first_beat_accent && this.current_beat === 1) {
+		if (this.first_beat_accent && this.current_beat === 0) {
 			// higher pitched sound
 		} else {
 			// lower pitched sound
@@ -94,17 +86,32 @@ var metronome = {
 }
 
 $(document).ready(function() {
+	// Audio
+	var context;
+	window.addEventListener('load', init, false);
+
+	function init() {
+		try {
+			window.AudioContext = window.AudioContext
+								 || window.webkitAudioContext;
+			context = new AudioContext();
+			console.log("init successful")
+		} catch (e) {
+			alert('Web Audio API is not supported in this browser');
+		}
+	}
+
 	$("#start_button").click(function() {
 		metronome.start();
 	})
 
 	$("#inc_tempo").click(function() {
-		metronome.increment_up();
+		metronome.increment_bpm("inc");
 		$("#bpm").html(metronome.bpm + " bpm");
 	})
 
 	$("#dec_tempo").click(function() {
-		metronome.increment_down();
+		metronome.increment_bpm("dec");
 		$("#bpm").html(metronome.bpm + " bpm");
 	})
 })
