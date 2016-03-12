@@ -13,18 +13,13 @@ var metronome = {
 	start: function () {
 		this.on = this.on ? false : true;
 
+		clearInterval(this.clicks);
+		this.reset_current_beat();
+
 		if (this.on) {
-			clearInterval(this.clicks);
-
-			this.reset_current_beat();
 			this.initate_click();
-
 			$("#start_button").html("Stop");
 		} else {
-			clearInterval(this.clicks);
-
-			this.reset_current_beat();
-			
 			$("#start_button").html("Start");
 		}
 	},
@@ -55,10 +50,12 @@ var metronome = {
 		// var denominator = $(document).(".denominator").val();
 	},
 	beat_subdivision: function(subdivision) {
-		// this.subdivision
+		$(".subdivison-dropdown").html(subdivision);
+		this.subdivision = subdivision;
 	},
-	sound_selector: function() {
-		// clave/click/cowbell
+	sound_selector: function(sound) {
+		$(".sound-dropdown").html(sound);
+		this.sound = sound;
 	},
 	reset_current_beat: function() {
 		this.current_beat = 0;
@@ -86,16 +83,46 @@ var metronome = {
 }
 
 $(document).ready(function() {
-	// Audio
+	// Audio API
+
+	// http://www.denhaku.com/r_box/sr16/sr16perc/hi%20block.wav
+	// http://www.denhaku.com/r_box/sr16/sr16perc/md%20block.wav
+	// http://www.denhaku.com/r_box/sr16/sr16perc/lo%20block.wav
+	var click;
+
+	// http://www.denhaku.com/r_box/sr16/sr16perc/hi%20clave.wav
+	// http://www.denhaku.com/r_box/sr16/sr16perc/lo%20clave.wav
+	var clave;
+	
+	// http://www.denhaku.com/r_box/sr16/sr16perc/hicowbel.wav
+	// http://www.denhaku.com/r_box/sr16/sr16perc/mdcowbel.wav
+	var cowbell;
+
 	var context;
+
 	window.addEventListener('load', init, false);
 
 	function init() {
 		try {
 			window.AudioContext = window.AudioContext
 								 || window.webkitAudioContext;
+
 			context = new AudioContext();
 			console.log("init successful")
+
+			function loadSounds(url) {
+				var request = new XMLHttpRequest();
+				request.open('GET', url, true)
+				request.responseType = 'arraybuffer';
+
+				request.onload = function() {
+					context.decodeAudioData(request.response, function (buffer) {
+						click = click;
+					}, onError)
+				}
+				request.send();
+			}
+
 		} catch (e) {
 			alert('Web Audio API is not supported in this browser');
 		}
@@ -103,15 +130,65 @@ $(document).ready(function() {
 
 	$("#start_button").click(function() {
 		metronome.start();
-	})
+	});
 
 	$("#inc_tempo").click(function() {
 		metronome.increment_bpm("inc");
 		$("#bpm").html(metronome.bpm + " bpm");
-	})
+	});
 
 	$("#dec_tempo").click(function() {
 		metronome.increment_bpm("dec");
 		$("#bpm").html(metronome.bpm + " bpm");
-	})
+	});
+
+	// Sounds
+	$("#click").click(function() {
+		metronome.sound_selector("Click");
+	});
+
+	$("#clave").click(function() {
+		metronome.sound_selector("Clave");
+	});
+
+	$("#cowbell").click(function() {
+		metronome.sound_selector("Cowbell");
+	});
+
+	// Subdivisions
+	$("#quarter-notes").click(function() {
+		metronome.beat_subdivision("Quarter Notes");
+	});
+
+	$("#8th-notes").click(function() {
+		metronome.beat_subdivision("8th Notes");
+	});
+
+	$("#triplets").click(function() {
+		metronome.beat_subdivision("Triplets");
+	});
+
+	$("#16th-notes").click(function() {
+		metronome.beat_subdivision("16th Notes");
+	});
+	
+	$("#32nd-notes").click(function() {
+		metronome.beat_subdivision("32nd Notes");
+	});
+	
+	$("#whole-notes").click(function() {
+		metronome.beat_subdivision("Whole Notes");
+	});
+
+	$("#half-notes").click(function() {
+		metronome.beat_subdivision("Half Notes");
+	});
+	
+	$("#quintuplets").click(function() {
+		metronome.beat_subdivision("Quintuplets");
+	});
+	
+	$("#septuplets").click(function() {
+		metronome.beat_subdivision("Septuplets");
+	});
 })
