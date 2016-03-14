@@ -142,6 +142,26 @@ $(document).ready(function() {
 		$("#bpm").html(metronome.bpm + " bpm");
 	});
 
+	// Sliders
+	var $vol_slider = $("#vol_slider"),
+		$tempo_slider = $("#tempo_slider");
+
+	$vol_slider.bind("", function (event, data) {
+
+	})
+
+	$vol_slider.bind("", function (event, data) {
+
+	})
+
+	$tempo_slider.bind("", function (event, data) {
+
+	})
+
+	$tempo_slider.bind("", function (event, data) {
+		
+	})
+
 	// Sounds
 	$("#click").click(function() {
 		metronome.sound_selector("Click");
