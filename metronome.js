@@ -45,16 +45,21 @@ var metronome = {
 	slider_logic: function() {
 		//////
 	},
-	time_sig_change: function() {
-		// var numerator = $(document).(".numerator").val();
-		// var denominator = $(document).(".denominator").val();
+	time_sig_change: function(num, den) {
+		if (num) {
+			$(".numerator-dropdown").html(num + ' <span class="caret"></span>');
+			this.time_sig[0] = num;
+		} else {
+			$(".denominator-dropdown").html(den + ' <span class="caret"></span>');
+			this.time_sig[1] = den;
+		}
 	},
 	beat_subdivision: function(subdivision) {
-		$(".subdivison-dropdown").html(subdivision);
+		$(".subdivison-dropdown").html(subdivision + ' <span class="caret"></span>');
 		this.subdivision = subdivision;
 	},
 	sound_selector: function(sound) {
-		$(".sound-dropdown").html(sound);
+		$(".sound-dropdown").html(sound + ' <span class="caret"></span>');
 		this.sound = sound;
 	},
 	reset_current_beat: function() {
@@ -146,20 +151,16 @@ $(document).ready(function() {
 	var $vol_slider = $("#vol_slider"),
 		$tempo_slider = $("#tempo_slider");
 
-	$vol_slider.bind("", function (event, data) {
+	$vol_slider.bind("slider:changed", function (event, data) {
+	  // // The currently selected value of the slider
+	  console.log(data.value);
 
-	})
+	  // // The value as a ratio of the slider (between 0 and 1)
+	  console.log(data.ratio);
+	});
 
-	$vol_slider.bind("", function (event, data) {
-
-	})
-
-	$tempo_slider.bind("", function (event, data) {
-
-	})
-
-	$tempo_slider.bind("", function (event, data) {
-		
+	$tempo_slider.bind("slider:changed", function (event, data) {
+		console.log("ready")
 	})
 
 	// Sounds
@@ -210,5 +211,93 @@ $(document).ready(function() {
 	
 	$("#septuplets").click(function() {
 		metronome.beat_subdivision("Septuplets");
+	});
+
+	// Beats
+	var $numerator = $(".numerator");
+	var $denominator = $(".denominator");
+
+	$numerator.find("#2").click(function() {
+		metronome.time_sig_change(2, false);
+	});
+
+	$numerator.find("#3").click(function() {
+		metronome.time_sig_change(3, false);
+	});
+
+	$numerator.find("#4").click(function() {
+		metronome.time_sig_change(4, false);
+	});
+
+	$numerator.find("#5").click(function() {
+		metronome.time_sig_change(5, false);
+	});
+
+	$numerator.find("#6").click(function() {
+		metronome.time_sig_change(6, false);
+	});
+
+	$numerator.find("#7").click(function() {
+		metronome.time_sig_change(7, false);
+	});
+
+	$numerator.find("#8").click(function() {
+		metronome.time_sig_change(8, false);
+	});
+
+	$numerator.find("#9").click(function() {
+		metronome.time_sig_change(9, false);
+	});
+
+	$numerator.find("#10").click(function() {
+		metronome.time_sig_change(10, false);
+	});
+
+	$numerator.find("#11").click(function() {
+		metronome.time_sig_change(11, false);
+	});
+
+	$numerator.find("#12").click(function() {
+		metronome.time_sig_change(12, false);
+	});
+
+	$numerator.find("#13").click(function() {
+		metronome.time_sig_change(13, false);
+	});
+
+	$numerator.find("#14").click(function() {
+		metronome.time_sig_change(14, false);
+	});
+
+	$numerator.find("#15").click(function() {
+		metronome.time_sig_change(15, false);
+	});
+
+	$numerator.find("#16").click(function() {
+		metronome.time_sig_change(16, false);
+	});
+
+	$numerator.find("#17").click(function() {
+		metronome.time_sig_change(17, false);
+	});
+
+	$numerator.find("#18").click(function() {
+		metronome.time_sig_change(18, false);
+	});
+
+	$denominator.find("#2").click(function() {
+		metronome.time_sig_change(false, 2);
+	});
+
+	$denominator.find("#4").click(function() {
+		metronome.time_sig_change(false, 4);
+	});
+
+	$denominator.find("#8").click(function() {
+		metronome.time_sig_change(false, 8);
+	});
+
+	$denominator.find("#16").click(function() {
+		metronome.time_sig_change(false, 16);
 	});
 })
