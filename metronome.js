@@ -1,7 +1,7 @@
 var metronome = {
 	on: false,
 	current_beat: 0,
-	bpm: 200,
+	bpm: 100,
 	time_sig: [4, 4],
 	subdivision: "quarter",
 	sound: "clave",
@@ -34,9 +34,12 @@ var metronome = {
 			}, (60000 / metronome.bpm))
 		}
 	},
-	increment_bpm: function (adjustBpm) {
-		(adjustBpm === "inc") ? this.bpm++ : this.bpm--;
+	increment_bpm: function (adjustBpm, bpmSlider) {
+		if (!bpmSlider) {
+			(adjustBpm === "inc") ? this.bpm++ : this.bpm--;
+		}
 
+		$("#bpm").html(metronome.bpm + " bpm");
 		clearInterval(this.clicks);
 
 		this.reset_current_beat();
@@ -76,8 +79,9 @@ var metronome = {
 	first_beat_accent: function() {
 		this.first_beat_accent = this.first_beat_accent ? false : true;
 	},
-	volume_level_slider: function() {
-
+	volume_level: function() {
+		// volume stuff
+		console.log("volume change")
 	},
 	current_beat_counter: function() {
 		
@@ -138,30 +142,26 @@ $(document).ready(function() {
 	});
 
 	$("#inc_tempo").click(function() {
-		metronome.increment_bpm("inc");
-		$("#bpm").html(metronome.bpm + " bpm");
+		metronome.increment_bpm("inc", false);
 	});
 
 	$("#dec_tempo").click(function() {
-		metronome.increment_bpm("dec");
-		$("#bpm").html(metronome.bpm + " bpm");
+		metronome.increment_bpm("dec", false);
 	});
 
 	// Sliders
-	var $vol_slider = $("#vol_slider"),
-		$tempo_slider = $("#tempo_slider");
-
-	$vol_slider.bind("slider:changed", function (event, data) {
-	  // // The currently selected value of the slider
-	  console.log(data.value);
-
-	  // // The value as a ratio of the slider (between 0 and 1)
-	  console.log(data.ratio);
-	});
+	var $tempo_slider = $("#tempo_slider"),
+		$vol_slider = $("#vol_slider");
 
 	$tempo_slider.bind("slider:changed", function (event, data) {
 		metronome.bpm = Math.round(data.value);
+		metronome.increment_bpm(metronome.bpm, true);
 	})
+
+	$vol_slider.bind("slider:changed", function (event, data) {
+		metronome.volume = Math.round(data.value);
+		metronome.volume_level();
+	});
 
 	// Sounds
 	$("#click").click(function() {
