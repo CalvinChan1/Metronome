@@ -160,7 +160,7 @@ $(document).ready(function() {
 	});
 
 	$tempo_slider.bind("slider:changed", function (event, data) {
-		console.log("ready")
+		metronome.bpm = Math.round(data.value);
 	})
 
 	// Sounds
@@ -191,6 +191,10 @@ $(document).ready(function() {
 
 	$("#16th-notes").click(function() {
 		metronome.beat_subdivision("16th Notes");
+	});
+
+	$("#sextuplets").click(function() {
+		metronome.beat_subdivision("16th Note Triplets");
 	});
 	
 	$("#32nd-notes").click(function() {
