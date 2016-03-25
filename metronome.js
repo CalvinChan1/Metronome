@@ -1,10 +1,11 @@
 var metronome = {
 	on: false,
-	current_beat: 0,
+	current_beat: 1,
 	bpm: 100,
 	time_sig: [4, 4],
 	subdivision: "quarter",
-	sound: "clave",
+	hi_sound: new Audio('Sounds/hiclave.wav'),
+	low_sound: new Audio('Sounds/lowclave.wav'),
 	first_beat_accent: true,
 	volume: 50,
 	// timer in seconds
@@ -15,6 +16,7 @@ var metronome = {
 
 		clearInterval(this.clicks);
 		this.reset_current_beat();
+		this.play_sound();
 
 		if (this.on) {
 			this.initate_click();
@@ -23,15 +25,25 @@ var metronome = {
 			$("#start_button").html("Start");
 		}
 	},
+	play_sound: function() {
+		if (!this.on) return;
+
+		if (this.first_beat_accent && this.current_beat === 1) {
+			// higher pitched sound
+			this.hi_sound.play();
+		} else {
+			// lower pitched sound
+			this.low_sound.play();
+		}
+	},
 	initate_click: function() {
 		if (this.on) {
 			this.clicks = setInterval(function() {
+				this.play_sound();
 				// change current beat
 				metronome.current_beat = (metronome.current_beat + 1) % (metronome.time_sig[0])
 				$("#beat_count").html(metronome.current_beat + 1);
-
-				// this.play_sound();
-			}, (60000 / metronome.bpm))
+			}.bind(this), (60000 / metronome.bpm))
 		}
 	},
 	increment_bpm: function (adjustBpm, bpmSlider) {
@@ -61,30 +73,15 @@ var metronome = {
 		$(".subdivison-dropdown").html(subdivision + ' <span class="caret"></span>');
 		this.subdivision = subdivision;
 	},
-	sound_selector: function(sound) {
-		$(".sound-dropdown").html(sound + ' <span class="caret"></span>');
-		this.sound = sound;
-	},
 	reset_current_beat: function() {
-		this.current_beat = 0;
+		this.current_beat = 1;
 		$("#beat_count").html("1");
-	},
-	play_sound: function() {
-		if (this.first_beat_accent && this.current_beat === 0) {
-			// higher pitched sound
-		} else {
-			// lower pitched sound
-		}
 	},
 	first_beat_accent: function() {
 		this.first_beat_accent = this.first_beat_accent ? false : true;
 	},
 	volume_level: function() {
 		// volume stuff
-		console.log("volume change")
-	},
-	current_beat_counter: function() {
-		
 	},
 	timer_input: function() {
 
@@ -163,17 +160,25 @@ $(document).ready(function() {
 		metronome.volume_level();
 	});
 
+	var $sound_dropdown = $(".sound-dropdown");
+
 	// Sounds
 	$("#click").click(function() {
-		metronome.sound_selector("Click");
+		$sound_dropdown.html('Click <span class="caret"></span>');
+		metronome.hi_sound = new Audio('Sounds/hiblock.wav');
+		metronome.low_sound = new Audio('Sounds/midblock.wav');
 	});
 
 	$("#clave").click(function() {
-		metronome.sound_selector("Clave");
+		$sound_dropdown.html('Clave <span class="caret"></span>');
+		metronome.hi_sound = new Audio('Sounds/hiclave.wav');
+		metronome.low_sound = new Audio('Sounds/lowclave.wav');
 	});
 
 	$("#cowbell").click(function() {
-		metronome.sound_selector("Cowbell");
+		$sound_dropdown.html('Cowbell <span class="caret"></span>');
+		metronome.hi_sound = new Audio('Sounds/hicowbell.wav');
+		metronome.low_sound = new Audio('Sounds/midcowbell.wav');
 	});
 
 	// Subdivisions
