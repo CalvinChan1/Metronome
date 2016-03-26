@@ -39,10 +39,15 @@ var metronome = {
 	initate_click: function() {
 		if (this.on) {
 			this.clicks = setInterval(function() {
-				this.play_sound();
 				// change current beat
-				metronome.current_beat = (metronome.current_beat + 1) % (metronome.time_sig[0])
-				$("#beat_count").html(metronome.current_beat + 1);
+				if (this.current_beat === this.time_sig[0]) {
+					this.current_beat = 1;
+				} else {
+					this.current_beat++;
+				}
+
+				$("#beat_count").html(metronome.current_beat);
+				this.play_sound();
 			}.bind(this), (60000 / metronome.bpm))
 		}
 	},
@@ -77,9 +82,6 @@ var metronome = {
 		this.current_beat = 1;
 		$("#beat_count").html("1");
 	},
-	first_beat_accent: function() {
-		this.first_beat_accent = this.first_beat_accent ? false : true;
-	},
 	volume_level: function() {
 		// volume stuff
 	},
@@ -91,48 +93,18 @@ var metronome = {
 $(document).ready(function() {
 	// Audio API
 
+	// Click source:
 	// http://www.denhaku.com/r_box/sr16/sr16perc/hi%20block.wav
 	// http://www.denhaku.com/r_box/sr16/sr16perc/md%20block.wav
 	// http://www.denhaku.com/r_box/sr16/sr16perc/lo%20block.wav
-	var click;
 
+	// Clave source:
 	// http://www.denhaku.com/r_box/sr16/sr16perc/hi%20clave.wav
 	// http://www.denhaku.com/r_box/sr16/sr16perc/lo%20clave.wav
-	var clave;
 	
+	// Cowbell source:
 	// http://www.denhaku.com/r_box/sr16/sr16perc/hicowbel.wav
 	// http://www.denhaku.com/r_box/sr16/sr16perc/mdcowbel.wav
-	var cowbell;
-
-	var context;
-
-	window.addEventListener('load', init, false);
-
-	function init() {
-		try {
-			window.AudioContext = window.AudioContext
-								 || window.webkitAudioContext;
-
-			context = new AudioContext();
-			console.log("init successful")
-
-			function loadSounds(url) {
-				var request = new XMLHttpRequest();
-				request.open('GET', url, true)
-				request.responseType = 'arraybuffer';
-
-				request.onload = function() {
-					context.decodeAudioData(request.response, function (buffer) {
-						click = click;
-					}, onError)
-				}
-				request.send();
-			}
-
-		} catch (e) {
-			alert('Web Audio API is not supported in this browser');
-		}
-	}
 
 	$("#start_button").click(function() {
 		metronome.start();
@@ -144,82 +116,6 @@ $(document).ready(function() {
 
 	$("#dec_tempo").click(function() {
 		metronome.increment_bpm("dec", false);
-	});
-
-	// Sliders
-	var $tempo_slider = $("#tempo_slider"),
-		$vol_slider = $("#vol_slider");
-
-	$tempo_slider.bind("slider:changed", function (event, data) {
-		metronome.bpm = Math.round(data.value);
-		metronome.increment_bpm(metronome.bpm, true);
-	})
-
-	$vol_slider.bind("slider:changed", function (event, data) {
-		metronome.volume = Math.round(data.value);
-		metronome.volume_level();
-	});
-
-	var $sound_dropdown = $(".sound-dropdown");
-
-	// Sounds
-	$("#click").click(function() {
-		$sound_dropdown.html('Click <span class="caret"></span>');
-		metronome.hi_sound = new Audio('Sounds/hiblock.wav');
-		metronome.low_sound = new Audio('Sounds/midblock.wav');
-	});
-
-	$("#clave").click(function() {
-		$sound_dropdown.html('Clave <span class="caret"></span>');
-		metronome.hi_sound = new Audio('Sounds/hiclave.wav');
-		metronome.low_sound = new Audio('Sounds/lowclave.wav');
-	});
-
-	$("#cowbell").click(function() {
-		$sound_dropdown.html('Cowbell <span class="caret"></span>');
-		metronome.hi_sound = new Audio('Sounds/hicowbell.wav');
-		metronome.low_sound = new Audio('Sounds/midcowbell.wav');
-	});
-
-	// Subdivisions
-	$("#quarter-notes").click(function() {
-		metronome.beat_subdivision("Quarter Notes");
-	});
-
-	$("#8th-notes").click(function() {
-		metronome.beat_subdivision("8th Notes");
-	});
-
-	$("#triplets").click(function() {
-		metronome.beat_subdivision("Triplets");
-	});
-
-	$("#16th-notes").click(function() {
-		metronome.beat_subdivision("16th Notes");
-	});
-
-	$("#sextuplets").click(function() {
-		metronome.beat_subdivision("16th Note Triplets");
-	});
-	
-	$("#32nd-notes").click(function() {
-		metronome.beat_subdivision("32nd Notes");
-	});
-	
-	$("#whole-notes").click(function() {
-		metronome.beat_subdivision("Whole Notes");
-	});
-
-	$("#half-notes").click(function() {
-		metronome.beat_subdivision("Half Notes");
-	});
-	
-	$("#quintuplets").click(function() {
-		metronome.beat_subdivision("Quintuplets");
-	});
-	
-	$("#septuplets").click(function() {
-		metronome.beat_subdivision("Septuplets");
 	});
 
 	// Beats
@@ -309,4 +205,87 @@ $(document).ready(function() {
 	$denominator.find("#16").click(function() {
 		metronome.time_sig_change(false, 16);
 	});
+
+	// Subdivisions
+	$("#quarter-notes").click(function() {
+		metronome.beat_subdivision("Quarter Notes");
+	});
+
+	$("#8th-notes").click(function() {
+		metronome.beat_subdivision("8th Notes");
+	});
+
+	$("#triplets").click(function() {
+		metronome.beat_subdivision("Triplets");
+	});
+
+	$("#16th-notes").click(function() {
+		metronome.beat_subdivision("16th Notes");
+	});
+
+	$("#sextuplets").click(function() {
+		metronome.beat_subdivision("16th Note Triplets");
+	});
+	
+	$("#32nd-notes").click(function() {
+		metronome.beat_subdivision("32nd Notes");
+	});
+	
+	$("#whole-notes").click(function() {
+		metronome.beat_subdivision("Whole Notes");
+	});
+
+	$("#half-notes").click(function() {
+		metronome.beat_subdivision("Half Notes");
+	});
+	
+	$("#quintuplets").click(function() {
+		metronome.beat_subdivision("Quintuplets");
+	});
+	
+	$("#septuplets").click(function() {
+		metronome.beat_subdivision("Septuplets");
+	});
+
+	var $sound_dropdown = $(".sound-dropdown");
+
+	// Sounds
+	$("#click").click(function() {
+		$sound_dropdown.html('Click <span class="caret"></span>');
+		metronome.hi_sound = new Audio('Sounds/hiblock.wav');
+		metronome.low_sound = new Audio('Sounds/midblock.wav');
+	});
+
+	$("#clave").click(function() {
+		$sound_dropdown.html('Clave <span class="caret"></span>');
+		metronome.hi_sound = new Audio('Sounds/hiclave.wav');
+		metronome.low_sound = new Audio('Sounds/lowclave.wav');
+	});
+
+	$("#cowbell").click(function() {
+		$sound_dropdown.html('Cowbell <span class="caret"></span>');
+		metronome.hi_sound = new Audio('Sounds/hicowbell.wav');
+		metronome.low_sound = new Audio('Sounds/midcowbell.wav');
+	});
+
+	// First Beat Accent button
+	$("#first_beat_accent").click(function() {
+		metronome.first_beat_accent = metronome.first_beat_accent ? false : true;
+	});
+
+	// Sliders
+	var $tempo_slider = $("#tempo_slider"),
+		$vol_slider = $("#vol_slider");
+
+	$tempo_slider.bind("slider:changed", function (event, data) {
+		metronome.bpm = Math.round(data.value);
+		metronome.increment_bpm(metronome.bpm, true);
+	})
+
+	$vol_slider.bind("slider:changed", function (event, data) {
+		metronome.volume = Math.round(data.value);
+		metronome.volume_level();
+	});
+
+
 })
