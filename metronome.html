@@ -7,19 +7,23 @@
 			Metronome + Timer
 		</title>
 
-		<link rel="stylesheet" type="text/css" href="metronome.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<link href="loopj-jquery-simple-slider-71115d9/css/simple-slider.css" rel="stylesheet" type="text/css" />
-<!-- 		<script src="loopj-jquery-simple-slider-71115d9/js/simple-slider.js"></script> -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
 		<!-- jQuery library -->
-		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+		<script src="src/jquery-2.2.2.min.js"></script>
 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<!-- Latest compiled JavaScript -->
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-		<script src="simple-slider.js"></script>
-		<script type="text/javascript" src="metronome.js"></script>
+
+		<!-- Pie Timer -->
+		<script type="text/javascript" src="src/pietimer-master/jquery.pietimer.js"></script>
+
+		<!-- Simple Slider -->
+		<script type="text/javascript" src="src/loopj-jquery-simple-slider-71115d9/js/simple-slider.js"></script>
+		<link href="src/loopj-jquery-simple-slider-71115d9/css/simple-slider.css" rel="stylesheet" type="text/css" />
+
+
+		<link rel="stylesheet" type="text/css" href="src/metronome.css">
+		<script type="text/javascript" src="src/metronome.js"></script>
 	</head>
 
 	<body>
@@ -66,7 +70,7 @@
 			<div id="second_row" class="row">
 				<!-- Tempo Slider -->
 				<div id="tempo_slider" class="slider">
-					<input id="tempo_slider" data-slider="true" data-slider-range="10,270" value="100">
+					<input id="tempo_slider" data-slider="true" data-slider-range="10,230" value="100">
 				</div>
 			</div>
 
@@ -192,15 +196,9 @@
 				</div>
 				
 			</div>
-
-
-			<!-- Audio Elements -->
-			<div id="audio" class="row">
-				<audio src="Sounds/lowclave.wav" id="low-clave"></audio>
-				<audio src="Sounds/hiclave.wav" id="hi-clave"></audio>
-			</div>
 		</div>
 
+		<div id="pie_timer">hello</div>
 	</body>
 </html>
 
