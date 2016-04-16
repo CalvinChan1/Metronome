@@ -17,6 +17,7 @@ var __slice = [].slice,
       var ratio,
         _this = this;
       this.input = input;
+      console.log("input is", input)
       this.defaultOptions = {
         animate: true,
         snapMid: false,
