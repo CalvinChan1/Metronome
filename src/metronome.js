@@ -3,7 +3,7 @@ var metronome = {
 	current_beat: 1,
 	bpm: 100,
 	min_bpm: 10,
-	max_bpm: 230,
+	max_bpm: 250,
 	time_sig: [4, 4],
 	subdivision: "quarter",
 	hi_sound: new Audio('Sounds/hiclave.wav'),
@@ -54,8 +54,9 @@ var metronome = {
 		}
 	},
 	increment_bpm: function (adjustBpm, bpmSlider) {
-		if ((adjustBpm === "inc" && this.bpm === 300) ||
-			(adjustBpm === "dec" && this.bpm === 10)) {
+		console.log(this.bpm)
+		if ((adjustBpm === "inc" && this.bpm === this.max_bpm) ||
+			(adjustBpm === "dec" && this.bpm === this.min_bpm)) {
 			return;
 		}
 		if (!bpmSlider) {
@@ -68,17 +69,18 @@ var metronome = {
 		// Note: Admittedly, this is a hacky way to increment the simple-slider.
 		// 		 this is a workaround due to the faulty built-in 'setValue' 
 		//       method that the slider provided.
-		var increment_slider_px = Math.round(300 / (this.max_bpm - this.min_bpm)),
-			current_slider_posn = parseInt($('#tempo_slider').find(".dragger").css("left")),
+		var increment_slider_px = 300 / (this.max_bpm - this.min_bpm),
+			current_slider_posn = parseFloat($('#tempo_slider').find(".dragger").css("left")),
 			new_slider_posn;
 
+		console.log("increment_slider_px", increment_slider_px)
 		if (adjustBpm === "inc") {
 			new_slider_posn = (current_slider_posn + increment_slider_px).toString() + "px";
 		} else {
 			new_slider_posn = (current_slider_posn - increment_slider_px).toString() + "px";
 		}
 
-		// $('#tempo_slider').find(".dragger").css("left", new_slider_posn);
+		$('#tempo_slider').find(".dragger").css("left", new_slider_posn);
 
 		clearInterval(this.clicks);
 
