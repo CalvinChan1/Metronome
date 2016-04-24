@@ -5,6 +5,7 @@ var metronome = {
 	min_bpm: 10,
 	max_bpm: 250,
 	time_sig: [4, 4],
+	current_timeout: 60000,
 	subdivision: "quarter",
 	hi_sound: new Audio('Sounds/hiclave.wav'),
 	med_sound: null,
@@ -40,6 +41,7 @@ var metronome = {
 	},
 	initate_click: function() {
 		if (this.on) {
+			clearInterval(this.clicks);
 			this.clicks = setInterval(function() {
 				// change current beat
 				if (this.current_beat === this.time_sig[0]) {
@@ -50,11 +52,10 @@ var metronome = {
 
 				$("#beat_count").html(metronome.current_beat);
 				this.play_sound();
-			}.bind(this), (60000 / metronome.bpm))
+			}.bind(this), (this.current_timeout / metronome.bpm))
 		}
 	},
 	increment_bpm: function (adjustBpm, bpmSlider) {
-		console.log(this.bpm)
 		if ((adjustBpm === "inc" && this.bpm === this.max_bpm) ||
 			(adjustBpm === "dec" && this.bpm === this.min_bpm)) {
 			return;
@@ -65,15 +66,14 @@ var metronome = {
 
 		$("#bpm").html(metronome.bpm + " bpm");
 
-		// 300px is the slider width
 		// Note: Admittedly, this is a hacky way to increment the simple-slider.
 		// 		 this is a workaround due to the faulty built-in 'setValue' 
 		//       method that the slider provided.
-		var increment_slider_px = 300 / (this.max_bpm - this.min_bpm),
+		var slider_width = 300,
+			increment_slider_px = slider_width / (this.max_bpm - this.min_bpm),
 			current_slider_posn = parseFloat($('#tempo_slider').find(".dragger").css("left")),
 			new_slider_posn;
 
-		console.log("increment_slider_px", increment_slider_px)
 		if (adjustBpm === "inc") {
 			new_slider_posn = (current_slider_posn + increment_slider_px).toString() + "px";
 		} else {
@@ -82,13 +82,7 @@ var metronome = {
 
 		$('#tempo_slider').find(".dragger").css("left", new_slider_posn);
 
-		clearInterval(this.clicks);
-
 		this.reset_current_beat();
-		this.initate_click();
-	},
-	slider_logic: function() {
-		//////
 	},
 	time_sig_change: function(num, den) {
 		if (num) {
@@ -97,6 +91,16 @@ var metronome = {
 		} else {
 			$(".denominator-dropdown").html(den + ' <span class="caret"></span>');
 			this.time_sig[1] = den;
+
+			if (den === 2) {
+				this.current_timeout = 120000;
+			} else if (den === 4) {
+				this.current_timeout = 60000;
+			} else if (den === 8) {
+				this.current_timeout = 30000;
+			} else if (den === 16) {
+				this.current_timeout = 15000;
+			}
 		}
 	},
 	beat_subdivision: function(subdivision) {
@@ -106,9 +110,16 @@ var metronome = {
 	reset_current_beat: function() {
 		this.current_beat = 1;
 		$("#beat_count").html("1");
+
+		this.initate_click();
 	},
 	volume_level: function() {
-		// volume stuff
+		// audio elements go from 0.0 to 1.0
+		var volume = this.volume / 100;
+
+		this.hi_sound.volume = volume;
+		// this.med_sound.volume = volume;
+		this.low_sound.volume = volume;
 	},
 	timer_input: function() {
 
@@ -279,18 +290,21 @@ $(document).ready(function() {
 		$sound_dropdown.html('Click <span class="caret"></span>');
 		metronome.hi_sound = new Audio('Sounds/hiblock.wav');
 		metronome.low_sound = new Audio('Sounds/midblock.wav');
+		metronome.volume_level();
 	});
 
 	$("#clave").click(function() {
 		$sound_dropdown.html('Clave <span class="caret"></span>');
 		metronome.hi_sound = new Audio('Sounds/hiclave.wav');
 		metronome.low_sound = new Audio('Sounds/lowclave.wav');
+		metronome.volume_level();
 	});
 
 	$("#cowbell").click(function() {
 		$sound_dropdown.html('Cowbell <span class="caret"></span>');
 		metronome.hi_sound = new Audio('Sounds/hicowbell.wav');
 		metronome.low_sound = new Audio('Sounds/midcowbell.wav');
+		metronome.volume_level();
 	});
 
 	// First Beat Accent button
