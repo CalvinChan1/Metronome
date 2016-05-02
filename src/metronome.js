@@ -1,14 +1,15 @@
 var metronome = {
 	on: false,
 	current_beat: 1,
+	current_beat_subdivision: 1,
 	bpm: 100,
 	min_bpm: 10,
 	max_bpm: 250,
 	time_sig: [4, 4],
 	current_timeout: 60000,
-	subdivision: "quarter",
+	subdivision: 1,
 	hi_sound: new Audio('Sounds/hiclave.wav'),
-	med_sound: null,
+	mid_sound: null,
 	low_sound: new Audio('Sounds/lowclave.wav'),
 	first_beat_accent: true,
 	volume: 50, // 0-100
@@ -31,25 +32,41 @@ var metronome = {
 	play_sound: function() {
 		if (!this.on) return;
 
-		if (this.first_beat_accent && this.current_beat === 1) {
+		if (this.first_beat_accent && this.current_beat === 1 &&
+			this.current_beat_subdivision === 1) {
 			// higher pitched sound
+			console.log("high")
 			this.hi_sound.play();
+		} else if (this.subdivision !== 1 &&
+				   this.current_beat_subdivision === 1) {
+			// mid pitched sound
+			console.log("mid")
+			// this.mid_sound.play();
 		} else {
 			// lower pitched sound
-			this.low_sound.play();
+			console.log("low")
+			// this.low_sound.play();
 		}
 	},
 	initate_click: function() {
 		if (this.on) {
 			clearInterval(this.clicks);
 			this.clicks = setInterval(function() {
-				// change current beat
-				if (this.current_beat === this.time_sig[0]) {
+				// reset back to 1
+				if (this.current_beat_subdivision === this.subdivision &&
+					this.current_beat === this.time_sig[0]) {
 					this.current_beat = 1;
-				} else {
+					this.current_beat_subdivision = 1;
+				} else if (this.current_beat_subdivision === this.subdivision) {
+					// last subdivision of the beat, will be an offbeat	
+					this.current_beat_subdivision = 1;
 					this.current_beat++;
+				} else {
+					// next subdivision in beat
+					this.current_beat_subdivision++;
 				}
 
+				// plays beat that just got incremented, so e
 				$("#beat_count").html(metronome.current_beat);
 				this.play_sound();
 			}.bind(this), (this.current_timeout / metronome.bpm))
@@ -106,6 +123,37 @@ var metronome = {
 	beat_subdivision: function(subdivision) {
 		$(".subdivison-dropdown").html(subdivision + ' <span class="caret"></span>');
 		this.subdivision = subdivision;
+
+		// Assuming denominator is quarters, need to figure out 2, 8, 16
+		// need to fix issue with current_timeout too
+		if (subdivision === "8th Notes") {
+			this.subdivision = 2;
+			this.current_timeout /= 2;
+		} else if (subdivision === "Triplets") {
+			this.subdivision = 3;
+			this.current_timeout /= 3;
+		} else if (subdivision === "16th Notes") {
+			this.subdivision = 4;
+			this.current_timeout /= 4;
+		} else if (subdivision === "16th Note Triplets") {
+			this.subdivision = 6;
+			this.current_timeout /= 6;
+		} else if (subdivision === "32nd Notes") {
+			this.subdivision = 8;
+			this.current_timeout /= 8;
+		} else if (subdivision === "Whole Notes") {
+			// this.subdivision = 0.25;
+			this.current_timeout *= 4;
+		} else if (subdivision === "Half Notes") {
+			// this.subdivision = 0.5;
+			this.current_timeout *= 2;
+		} else if (subdivision === "Quintuplets") {
+			this.subdivision = 5;
+			this.current_timeout /= 5;
+		} else if (subdivision === "Septuplets") {
+			this.subdivision = 7;
+			this.current_timeout /= 7;
+		} 
 	},
 	reset_current_beat: function() {
 		this.current_beat = 1;
@@ -118,7 +166,7 @@ var metronome = {
 		var volume = this.volume / 100;
 
 		this.hi_sound.volume = volume;
-		// this.med_sound.volume = volume;
+		// this.mid_sound.volume = volume;
 		this.low_sound.volume = volume;
 	},
 	timer_input: function() {
