@@ -13,14 +13,16 @@ var metronome = {
 	low_sound: new Audio('Sounds/lowclave.wav'),
 	first_beat_accent: true,
 	volume: 50, // 0-100
-	timer: 150, // timer in seconds
+	timer: 0, // timer in seconds
 	clicks: false,
+	timer_init: false,
 	start: function () {
 		this.on = this.on ? false : true;
 
 		clearInterval(this.clicks);
 		this.reset_current_beat();
 		this.play_sound();
+		this.timer_count();
 
 		if (this.on) {
 			this.initate_click();
@@ -45,7 +47,7 @@ var metronome = {
 		} else {
 			// lower pitched sound
 			console.log("low")
-			// this.low_sound.play();
+			this.low_sound.play();
 		}
 	},
 	initate_click: function() {
@@ -58,7 +60,7 @@ var metronome = {
 					this.current_beat = 1;
 					this.current_beat_subdivision = 1;
 				} else if (this.current_beat_subdivision === this.subdivision) {
-					// last subdivision of the beat, will be an offbeat	
+					// last subdivision of the beat, will be an offbeat
 					this.current_beat_subdivision = 1;
 					this.current_beat++;
 				} else {
@@ -98,7 +100,6 @@ var metronome = {
 		}
 
 		$('#tempo_slider').find(".dragger").css("left", new_slider_posn);
-
 		this.reset_current_beat();
 	},
 	time_sig_change: function(num, den) {
@@ -126,34 +127,37 @@ var metronome = {
 
 		// Assuming denominator is quarters, need to figure out 2, 8, 16
 		// need to fix issue with current_timeout too
-		if (subdivision === "8th Notes") {
+		if (subdivision === "Quarter Notes") {
+			this.subdivision = 1;
+			this.current_timeout = 60000;
+		} else if (subdivision === "8th Notes") {
 			this.subdivision = 2;
-			this.current_timeout /= 2;
+			this.current_timeout = 30000;
 		} else if (subdivision === "Triplets") {
 			this.subdivision = 3;
-			this.current_timeout /= 3;
+			this.current_timeout = 20000;
 		} else if (subdivision === "16th Notes") {
 			this.subdivision = 4;
-			this.current_timeout /= 4;
+			this.current_timeout = 15000;
 		} else if (subdivision === "16th Note Triplets") {
 			this.subdivision = 6;
-			this.current_timeout /= 6;
+			this.current_timeout = 10000;
 		} else if (subdivision === "32nd Notes") {
 			this.subdivision = 8;
-			this.current_timeout /= 8;
+			this.current_timeout = 7500;
 		} else if (subdivision === "Whole Notes") {
 			// this.subdivision = 0.25;
-			this.current_timeout *= 4;
+			this.current_timeout = 240000;
 		} else if (subdivision === "Half Notes") {
 			// this.subdivision = 0.5;
-			this.current_timeout *= 2;
+			this.current_timeout = 120000;
 		} else if (subdivision === "Quintuplets") {
 			this.subdivision = 5;
-			this.current_timeout /= 5;
+			this.current_timeout = 12000;
 		} else if (subdivision === "Septuplets") {
 			this.subdivision = 7;
-			this.current_timeout /= 7;
-		} 
+			this.current_timeout = 60000 / 7;
+		}
 	},
 	reset_current_beat: function() {
 		this.current_beat = 1;
@@ -169,8 +173,15 @@ var metronome = {
 		// this.mid_sound.volume = volume;
 		this.low_sound.volume = volume;
 	},
-	timer_input: function() {
-
+	timer_count: function() {
+		if (this.on) {
+			this.timer_init = setInterval(function() {
+				$("#timeplz").html(this.timer);
+				this.timer++;
+			}.bind(this), 1000)
+		} else {
+			clearInterval(this.timer_init);
+		}
 	}
 }
 
