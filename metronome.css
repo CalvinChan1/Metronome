@@ -8,6 +8,7 @@ body {
 #metronome {
 	padding: 0 40px 0 40px;
 	display: inline-block;
+	width: 500px;
 }
 
 #pie_timer {
@@ -16,6 +17,10 @@ body {
 
 #keyboard_shortcuts {
 	display: inline-block;
+}
+
+#increment_interval {
+	color: black;
 }
 
 /*.button:active {
@@ -51,6 +56,11 @@ body {
 	padding: 15px 35px;
 	background-color: black;
 	display: inline-block;
+}
+
+#increment_interval {
+	display: inline-block;
+	width: 50px;
 }
 
 /*second row*/
@@ -142,6 +152,10 @@ body {
 
 #seconds {
 	display: inline-block;
+}
+
+.time_reset {
+	background-color: green;
 }
 
 input {

@@ -24,6 +24,8 @@
 
 		<link rel="stylesheet" type="text/css" href="src/metronome.css">
 		<script type="text/javascript" src="src/metronome.js"></script>
+		<!-- This prevents the throttling issue when changing browser tabs -->
+		<script type="text/javascript" src="src/HackTimer/HackTimer.js"></script>
 	</head>
 
 	<body>
@@ -55,7 +57,8 @@
 					<!-- Decrease Tempo (- sign) -->
 					<div id="dec_tempo" class="button">
 						-
-					</div>	
+					</div>
+					<input type="number" id="increment_interval"></input>
 				</div>
 
 				<!-- Enter Desired Tempo (Pops up empty box (New Panel)) -->
@@ -199,13 +202,15 @@
 		</div>
 
 		<div id="pie_timer">hello</div>
+		<div id="timeplz">Seconds Elapsed: 0</div>
+		<div class="time_reset">Reset Time</div>
 
 		<div id="keyboard_shortcuts">
-			<ul>
+<!-- 			<ul>
 				<li>Increment bpm by 1: Up Arrow</li>
 				<li>Decrement bpm by 1: Down Arrow</li>
 				<li>Start/Stop metronome: Spacebar</li>
-			</ul>
+			</ul> -->
 		</div>
 	</body>
 </html>
