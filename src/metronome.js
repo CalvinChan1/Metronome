@@ -440,18 +440,3 @@ $(document).ready(function() {
 		}
 	})
 })
-
-
-// /////// WebWorkers code
-// // beat may be incorrect when returning to tab
-// // click should still be correct
-
-// var myWorker = new Worker("test.js")
-
-// myWorker.onmessage = function(event) {
-
-// }
-
-
-
-
