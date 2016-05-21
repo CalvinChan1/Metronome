@@ -47,7 +47,7 @@ var metronome = {
 		} else {
 			// lower pitched sound
 			console.log("low")
-			console.log("current beat sub: " + this.current_beat_subdivision)
+			// console.log("current beat sub: " + this.current_beat_subdivision)
 			this.low_sound[this.current_beat_subdivision].play();
 		}
 	},
@@ -112,14 +112,39 @@ var metronome = {
 			$(".denominator-dropdown").html(den + ' <span class="caret"></span>');
 			this.time_sig[1] = den;
 
+			function hide_subdivision_options() {
+				$('#quarter-notes').hide();
+				$('#triplets').hide();
+				$('#whole-notes').hide();
+				$('#half-notes').hide();
+				$('#quintuplets').hide();
+				$('#septuplets').hide();
+			}
+
 			if (den === 2) {
 				this.current_timeout = 120000;
+				hide_subdivision_options();
+				$('#quarter-notes').show();
 			} else if (den === 4) {
 				this.current_timeout = 60000;
+				$('#quarter-notes').show();
+				$('#8th-notes').show();
+				$('#triplets').show();
+				$('#sextuplets').show();
+				$('#whole-notes').show();
+				$('#half-notes').show();
+				$('#quintuplets').show();
+				$('#septuplets').show();
 			} else if (den === 8) {
 				this.current_timeout = 30000;
+				$(".subdivison-dropdown").html('8th Notes <span class="caret"></span>');
+				hide_subdivision_options();
 			} else if (den === 16) {
 				this.current_timeout = 15000;
+				hide_subdivision_options();
+				$(".subdivison-dropdown").html('16th Notes <span class="caret"></span>');
+				$('#8th-notes').hide();
+				$('#sextuplets').hide();
 			}
 		}
 		this.reset_current_beat();
@@ -392,7 +417,6 @@ $(document).ready(function() {
 
 		metronome.hi_sound = hi_sound.cloneNode();
 		metronome.mid_sound = mid_sound.cloneNode();
-		// metronome.low_sound = low_sound.cloneNode();
 
 		for (var i = 0; i < 9; i++) {
 			metronome.low_sound[i] = low_sound.cloneNode();
