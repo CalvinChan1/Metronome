@@ -112,36 +112,30 @@ var metronome = {
 			$(".denominator-dropdown").html(den + ' <span class="caret"></span>');
 			this.time_sig[1] = den;
 
-			function hide_subdivision_options() {
-				$('#quarter-notes').hide();
-				$('#triplets').hide();
-				$('#whole-notes').hide();
-				$('#half-notes').hide();
-				$('#quintuplets').hide();
-				$('#septuplets').hide();
+			function hide_or_show_subdivision_options(show_or_hide) {
+				var subdivisions = [$('#quarter-notes'), $('#triplets'),
+									$('#whole-notes'), $('#half-notes'),
+									$('#quintuplets'), $('#septuplets')]
+
+				for (var i = 0; i < subdivisions.length; i++) {
+					show_or_hide === "show" ? subdivisions[i].show() : subdivisions[i].hide();
+				}
 			}
 
 			if (den === 2) {
 				this.current_timeout = 120000;
-				hide_subdivision_options();
+				hide_or_show_subdivision_options("hide");
 				$('#quarter-notes').show();
 			} else if (den === 4) {
 				this.current_timeout = 60000;
-				$('#quarter-notes').show();
-				$('#8th-notes').show();
-				$('#triplets').show();
-				$('#sextuplets').show();
-				$('#whole-notes').show();
-				$('#half-notes').show();
-				$('#quintuplets').show();
-				$('#septuplets').show();
+				hide_or_show_subdivision_options("show");
 			} else if (den === 8) {
 				this.current_timeout = 30000;
 				$(".subdivison-dropdown").html('8th Notes <span class="caret"></span>');
-				hide_subdivision_options();
+				hide_or_show_subdivision_options("hide");
 			} else if (den === 16) {
 				this.current_timeout = 15000;
-				hide_subdivision_options();
+				hide_or_show_subdivision_options("hide");
 				$(".subdivison-dropdown").html('16th Notes <span class="caret"></span>');
 				$('#8th-notes').hide();
 				$('#sextuplets').hide();
@@ -150,36 +144,13 @@ var metronome = {
 		this.reset_current_beat();
 	},
 	beat_subdivision: function(subdivision) {
-		$(".subdivison-dropdown").html(subdivision + ' <span class="caret"></span>');
+		subdivision_name = $("ul").find("[data-subdivision='" + subdivision + "']").html();
+
+		$(".subdivison-dropdown").html(subdivision_name + ' <span class="caret"></span>');
 		this.subdivision = subdivision;
 		var quarter_note_timeout = 60000;
 
-		// Assuming denominator is quarters, need to figure out 2, 8, 16
 		// need to fix issue with current_timeout too
-		if (subdivision === "Quarter Notes") {
-			this.subdivision = 1;
-		} else if (subdivision === "8th Notes") {
-			this.subdivision = 2;
-		} else if (subdivision === "Triplets") {
-			this.subdivision = 3;
-		} else if (subdivision === "16th Notes") {
-			this.subdivision = 4;
-		} else if (subdivision === "16th Note Triplets") {
-			this.subdivision = 6;
-		} else if (subdivision === "32nd Notes") {
-			this.subdivision = 8;
-		} else if (subdivision === "Whole Notes") {
-			// this.subdivision = 0.25;
-			this.current_timeout = 240000;
-		} else if (subdivision === "Half Notes") {
-			// this.subdivision = 0.5;
-			this.current_timeout = 120000;
-		} else if (subdivision === "Quintuplets") {
-			this.subdivision = 5;
-		} else if (subdivision === "Septuplets") {
-			this.subdivision = 7;
-		}
-
 		this.current_timeout = quarter_note_timeout / this.subdivision;
 		this.reset_current_beat();
 	},
@@ -247,131 +218,45 @@ $(document).ready(function() {
 	var $numerator = $(".numerator");
 	var $denominator = $(".denominator");
 
-	$numerator.find("#2").click(function() {
-		metronome.time_sig_change(2, false);
-	});
+	function numerator_click_handler(numerator) {
+		$numerator.find("#" + numerator).click(function() {
+			metronome.time_sig_change(numerator, false);
+		});
+	}
 
-	$numerator.find("#3").click(function() {
-		metronome.time_sig_change(3, false);
-	});
+	function denominator_click_handler(denominator) {
+		$denominator.find("#" + denominator).click(function() {
+			metronome.time_sig_change(false, denominator);
+		});
+	}
 
-	$numerator.find("#4").click(function() {
-		metronome.time_sig_change(4, false);
-	});
+	for (var i = 0; i < 18; i++) {
+		numerator_click_handler(i);
+	}
 
-	$numerator.find("#5").click(function() {
-		metronome.time_sig_change(5, false);
-	});
+	for (var j = 1; j < 5; j++) {
+		denominator_click_handler(Math.pow(2, j));
+	}
 
-	$numerator.find("#6").click(function() {
-		metronome.time_sig_change(6, false);
-	});
+	// Subdivisions' event handlers
+	var subdivisions_ids = ["#quarter-notes", "#8th-notes",
+							"#triplets", "#16th-notes",
+							"#sextuplets", "#32nd-notes",
+							"#whole-notes", "#half-notes",
+							"#quintuplets", "#septuplets"]
 
-	$numerator.find("#7").click(function() {
-		metronome.time_sig_change(7, false);
-	});
+	function add_subdivision_click_handler(subdiv_id) {
+		$(subdiv_id).click(function() {
+			var subdiv_number = $(subdiv_id).data("subdivision")
+			metronome.beat_subdivision(subdiv_number);
+		})
+	}
 
-	$numerator.find("#8").click(function() {
-		metronome.time_sig_change(8, false);
-	});
+	for (var i = 0; i < subdivisions_ids.length; i++) {
+		add_subdivision_click_handler(subdivisions_ids[i])
+	}
 
-	$numerator.find("#9").click(function() {
-		metronome.time_sig_change(9, false);
-	});
-
-	$numerator.find("#10").click(function() {
-		metronome.time_sig_change(10, false);
-	});
-
-	$numerator.find("#11").click(function() {
-		metronome.time_sig_change(11, false);
-	});
-
-	$numerator.find("#12").click(function() {
-		metronome.time_sig_change(12, false);
-	});
-
-	$numerator.find("#13").click(function() {
-		metronome.time_sig_change(13, false);
-	});
-
-	$numerator.find("#14").click(function() {
-		metronome.time_sig_change(14, false);
-	});
-
-	$numerator.find("#15").click(function() {
-		metronome.time_sig_change(15, false);
-	});
-
-	$numerator.find("#16").click(function() {
-		metronome.time_sig_change(16, false);
-	});
-
-	$numerator.find("#17").click(function() {
-		metronome.time_sig_change(17, false);
-	});
-
-	$numerator.find("#18").click(function() {
-		metronome.time_sig_change(18, false);
-	});
-
-	$denominator.find("#2").click(function() {
-		metronome.time_sig_change(false, 2);
-	});
-
-	$denominator.find("#4").click(function() {
-		metronome.time_sig_change(false, 4);
-	});
-
-	$denominator.find("#8").click(function() {
-		metronome.time_sig_change(false, 8);
-	});
-
-	$denominator.find("#16").click(function() {
-		metronome.time_sig_change(false, 16);
-	});
-
-	// Subdivisions
-	$("#quarter-notes").click(function() {
-		metronome.beat_subdivision("Quarter Notes");
-	});
-
-	$("#8th-notes").click(function() {
-		metronome.beat_subdivision("8th Notes");
-	});
-
-	$("#triplets").click(function() {
-		metronome.beat_subdivision("Triplets");
-	});
-
-	$("#16th-notes").click(function() {
-		metronome.beat_subdivision("16th Notes");
-	});
-
-	$("#sextuplets").click(function() {
-		metronome.beat_subdivision("16th Note Triplets");
-	});
-	
-	$("#32nd-notes").click(function() {
-		metronome.beat_subdivision("32nd Notes");
-	});
-	
-	$("#whole-notes").click(function() {
-		metronome.beat_subdivision("Whole Notes");
-	});
-
-	$("#half-notes").click(function() {
-		metronome.beat_subdivision("Half Notes");
-	});
-	
-	$("#quintuplets").click(function() {
-		metronome.beat_subdivision("Quintuplets");
-	});
-	
-	$("#septuplets").click(function() {
-		metronome.beat_subdivision("Septuplets");
-	});
-
+	// Sounds
 	var $sound_dropdown = $(".sound-dropdown");
 
 	var hi_sound = new Audio('Sounds/Block/hiblock.wav'),
@@ -380,7 +265,6 @@ $(document).ready(function() {
 
 	load_sound();
 
-	// Sounds
 	$("#click").click(function() {
 		$sound_dropdown.html('Click <span class="caret"></span>');
 		load_sound('block');
