@@ -259,11 +259,11 @@ $(document).ready(function() {
 	// Sounds
 	var $sound_dropdown = $(".sound-dropdown");
 
-	var hi_sound = new Audio('Sounds/Block/hiblock.wav'),
-		mid_sound = new Audio('Sounds/Block/midblock.wav'),
-		low_sound = new Audio('Sounds/Block/lowblock.wav');
+	var hi_sound = new Audio('Sounds/clave/hiclave.wav'),
+		mid_sound = new Audio('Sounds/clave/midclave.wav'),
+		low_sound = new Audio('Sounds/clave/lowclave.wav');
 
-	load_sound();
+	load_sound('clave');
 
 	$("#click").click(function() {
 		$sound_dropdown.html('Click <span class="caret"></span>');
