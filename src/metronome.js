@@ -10,7 +10,7 @@ var metronome = {
 	subdivision: 1,
 	hi_sound: new Audio('Sounds/Clave/hiclave.wav'),
 	mid_sound: null,
-	low_sound: [], // new Audio('Sounds/Clave/lowclave.wav'),
+	low_sound: [],
 	first_beat_accent: true,
 	volume: 50, // 0-100
 	timer: 0, // timer in seconds
@@ -36,18 +36,14 @@ var metronome = {
 
 		if (this.first_beat_accent && this.current_beat === 1 &&
 			this.current_beat_subdivision === 1) {
-			// higher pitched sound
-			console.log("high")
+			// console.log("high")
 			this.hi_sound.play();
 		} else if (this.subdivision !== 1 &&
 				   this.current_beat_subdivision === 1) {
-			// mid pitched sound  
-			console.log("mid")
+			// console.log("mid")
 			this.mid_sound.play();
 		} else {
-			// lower pitched sound
-			console.log("low")
-			// console.log("current beat sub: " + this.current_beat_subdivision)
+			// console.log("low")
 			this.low_sound[this.current_beat_subdivision].play();
 		}
 	},
@@ -184,8 +180,6 @@ var metronome = {
 }
 
 $(document).ready(function() {
-	// Audio API
-
 	// Click source:
 	// http://www.denhaku.com/r_box/sr16/sr16perc/hi%20block.wav
 	// http://www.denhaku.com/r_box/sr16/sr16perc/md%20block.wav
@@ -272,17 +266,11 @@ $(document).ready(function() {
 
 	$("#clave").click(function() {
 		$sound_dropdown.html('Clave <span class="caret"></span>');
-		// hi_sound = new Audio('Sounds/Clave/hiclave.wav');
-		// need a med sound, might use audacity to adjust pitch
-		// low_sound = new Audio('Sounds/Clave/lowclave.wav');
 		load_sound('clave');
 	});
 
 	$("#cowbell").click(function() {
 		$sound_dropdown.html('Cowbell <span class="caret"></span>');
-		// hi_sound = new Audio('Sounds/Cowbell/hicowbell.wav');
-		// mid_sound = new Audio('Sounds/Cowbell/hicowbell.wav');
-		// low_sound = new Audio('Sounds/Cowbell/lowcowbell.wav');
 		load_sound('cowbell');
 	});
 
