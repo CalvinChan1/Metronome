@@ -1,17 +1,18 @@
 var metronome = {
 	on: false,
-	current_beat: 1,
-	current_beat_subdivision: 1,
 	bpm: 100,
 	min_bpm: 10,
 	max_bpm: 250,
-	time_sig: [4, 4],
+	current_beat: 1,
+	current_beat_subdivision: 1,
 	current_timeout: 60000,
 	subdivision: 1,
+	increment_interval: 1,
+	time_sig: [4, 4],
+	first_beat_accent: true,
 	hi_sound: new Audio('Sounds/Clave/hiclave.wav'),
 	mid_sound: null,
 	low_sound: [],
-	first_beat_accent: true,
 	volume: 50, // 0-100
 	timer: 0, // timer in seconds
 	clicks: false,
@@ -19,7 +20,10 @@ var metronome = {
 	start: function () {
 		this.on = this.on ? false : true;
 
+		// stops click
 		clearInterval(this.clicks);
+
+		// reset and ready metronome for init
 		this.reset_current_beat();
 		this.play_sound();
 		this.timer_count();
@@ -73,12 +77,15 @@ var metronome = {
 		}
 	},
 	increment_bpm: function (adjustBpm, bpmSlider) {
-		if ((adjustBpm === "inc" && this.bpm === this.max_bpm) ||
-			(adjustBpm === "dec" && this.bpm === this.min_bpm)) {
+		if ((adjustBpm === "inc" &&
+			 this.bpm + this.increment_interval > this.max_bpm) ||
+			(adjustBpm === "dec" &&
+			 this.bpm - this.increment_interval < this.min_bpm)) {
 			return;
 		}
 		if (!bpmSlider) {
-			(adjustBpm === "inc") ? this.bpm++ : this.bpm--;
+			(adjustBpm === "inc") ? this.bpm += this.increment_interval :
+									this.bpm -= this.increment_interval;
 		}
 
 		$("#bpm").html(metronome.bpm + " bpm");
@@ -87,15 +94,12 @@ var metronome = {
 		// 		 this is a workaround due to the faulty built-in 'setValue' 
 		//       method that the slider provided.
 		var slider_width = 300,
-			increment_slider_px = slider_width / (this.max_bpm - this.min_bpm),
+			increment_slider_px = slider_width / (this.max_bpm - this.min_bpm) * this.increment_interval,
 			current_slider_posn = parseFloat($('#tempo_slider').find(".dragger").css("left")),
 			new_slider_posn;
 
-		if (adjustBpm === "inc") {
-			new_slider_posn = (current_slider_posn + increment_slider_px).toString() + "px";
-		} else {
-			new_slider_posn = (current_slider_posn - increment_slider_px).toString() + "px";
-		}
+		(adjustBpm === "inc") ? new_slider_posn = (current_slider_posn + increment_slider_px).toString() + "px" :
+								new_slider_posn = (current_slider_posn - increment_slider_px).toString() + "px";
 
 		$('#tempo_slider').find(".dragger").css("left", new_slider_posn);
 		this.reset_current_beat();
@@ -208,9 +212,15 @@ $(document).ready(function() {
 		metronome.increment_bpm("dec", false);
 	});
 
+	var $increment_interval = $("#increment_interval");
+	$increment_interval.on("change", function() {
+		var increment_val = $increment_interval[0].value;
+		metronome.increment_interval = parseInt(increment_val);
+	});
+
 	// Beats
-	var $numerator = $(".numerator");
-	var $denominator = $(".denominator");
+	var $numerator = $(".numerator"),
+		$denominator = $(".denominator");
 
 	function numerator_click_handler(numerator) {
 		$numerator.find("#" + numerator).click(function() {
