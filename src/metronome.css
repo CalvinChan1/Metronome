@@ -8,6 +8,7 @@ body {
 #metronome {
 	padding: 0 40px 0 40px;
 	display: inline-block;
+	width: 100%;
 }
 
 #pie_timer {
@@ -47,6 +48,11 @@ body {
 	padding: 15px 35px;
 	background-color: black;
 	display: inline-block;
+}
+
+#increment_interval {
+	width: 55px;
+	color: black;
 }
 
 /*second row*/
