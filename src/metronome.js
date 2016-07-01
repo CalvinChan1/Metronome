@@ -8,6 +8,7 @@ var metronome = {
 	current_timeout: 60000,
 	subdivision: 1,
 	increment_interval: 1,
+	bar_number: 0,
 	time_sig: [4, 4],
 	first_beat_accent: true,
 	hi_sound: new Audio('Sounds/Clave/hiclave.wav'),
@@ -32,6 +33,9 @@ var metronome = {
 			this.initate_click();
 			$("#start_button").html("Stop");
 		} else {
+			this.bar_number = 0;
+			$("#bar_counter").html("Bar Counter: 0");
+
 			$("#start_button").html("Start");
 		}
 	},
@@ -61,6 +65,11 @@ var metronome = {
 					// first beat of the bar
 					this.current_beat = 1;
 					this.current_beat_subdivision = 1;
+					
+					// new bar
+					this.bar_number++;
+					$("#bar_counter").html("Bar Counter: " +
+											this.bar_number.toString())
 				} else if (this.current_beat_subdivision === this.subdivision) {
 					// last subdivision of the beat, will be an offbeat
 					this.current_beat_subdivision = 1;

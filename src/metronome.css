@@ -81,6 +81,10 @@ body {
 	display: inline-block;
 }
 
+#bar_counter {
+	display: inline-block;
+}
+
 /*Fourth Row*/
 #beat_subdiv {
 	display: inline-block;

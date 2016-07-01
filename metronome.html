@@ -59,16 +59,9 @@
 					<div id="dec_tempo" class="button">
 						-
 					</div>
-					<input type="number" id="increment_interval" value="1"></input>
+					<input type="number" id="increment_interval" value="1" min="1" max="100"></input>
 				</div>
-
-				<!-- Enter Desired Tempo (Pops up empty box (New Panel)) -->
-				<!-- <div id="enter_tempo">
-					<input></input>
-				</div> -->
-
 			</div>
-
 
 			<!-- Second Row (Tempo Slider) -->
 			<div id="second_row" class="row">
@@ -78,7 +71,7 @@
 				</div>
 			</div>
 
-			<!-- Third Row (Time Signature) -->
+			<!-- Third Row (Time Signature/Bar Counter) -->
 			<div id="third_row" class="row">
 				<div id="time_sig">
 					Time Signature
@@ -122,6 +115,9 @@
 							<li><a href="#" id="16">16</a></li>
 						</ul>
 					</div>
+				</div>
+				<div id="bar_counter">
+					Bar Counter: 0
 				</div>
 			</div>
 
