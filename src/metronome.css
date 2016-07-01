@@ -11,10 +11,6 @@ body {
 	width: 100%;
 }
 
-#pie_timer {
-	display: inline-block;
-}
-
 /*.button:active {
 	border-style: solid;
 	border-color: gray;
@@ -138,7 +134,7 @@ body {
 }
 
 /*Eighth Row*/
-#timer_title {
+/*#timer_title {
 	font-size: 25px;
 }
 
@@ -148,10 +144,23 @@ body {
 
 #seconds {
 	display: inline-block;
+}*/
+
+#timeplz {
+	display: inline-block;
 }
 
-input {
-	width: 35px;
+#pie_timer {
+	display: inline-block;
+}
+
+.time_reset {
+	padding: 10px 10px 10px 10px;
+	width: 20%;
+	background-color: black;
+	font-size: 15px;
+	color: white;
+	text-align: center;
 }
 
 .dropdown {

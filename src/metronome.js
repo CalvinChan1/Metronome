@@ -336,7 +336,7 @@ $(document).ready(function() {
 	});
 
 	// Timer
-	$("#time_reset").click(function() {
+	$(".time_reset").click(function() {
 		metronome.timer = 0;
 	})
 

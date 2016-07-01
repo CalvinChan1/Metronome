@@ -10,9 +10,10 @@
 		<!-- jQuery library -->
 		<script src="src/jquery-2.2.2.min.js"></script>
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<link rel="stylesheet" type="text/css" href="src/bootstrap-3.3.6/dist/css/bootstrap.min.css">
 		<!-- Latest compiled JavaScript -->
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script src="src/bootstrap-3.3.6/dist/js/bootstrap.min.js"></script>
 
 		<!-- Pie Timer -->
 		<script type="text/javascript" src="src/pietimer-master/jquery.pietimer.js"></script>
@@ -50,6 +51,7 @@
 				<div id="bpm">
 					100 bpm
 				</div>
+
 				<div id="increment_bpm" class="button">
 					<!-- Increase Tempo (+ sign) -->
 					<div id="inc_tempo">
@@ -59,6 +61,7 @@
 					<div id="dec_tempo" class="button">
 						-
 					</div>
+
 					<input type="number" id="increment_interval" value="1" min="1" max="100"></input>
 				</div>
 			</div>
@@ -76,6 +79,7 @@
 				<div id="time_sig">
 					Time Signature
 				</div>
+
 				<div id="time_sig_menu">
 					<div id="numerator" class="dropdown">
 						<button class="btn btn-primary dropdown-toggle numerator-dropdown" type="button" data-toggle="dropdown">
@@ -116,6 +120,7 @@
 						</ul>
 					</div>
 				</div>
+
 				<div id="bar_counter">
 					Bar Counter: 0
 				</div>
@@ -124,6 +129,7 @@
 			<!-- Fourth Row (Beat Subdivision) -->
 			<div id="fourth_row" class="row">
 				<div id="beat_subdiv">Beat Subdivision</div>
+
 				<div id="beat_subdiv_menu" class="dropdown">
 					<button class="btn btn-primary dropdown-toggle subdivison-dropdown" 
 					type="button" data-toggle="dropdown">
@@ -184,7 +190,7 @@
 			</div>
 
 			<!-- Eighth Row (Timer) -->
-			<div id="eighth_row" class="row">
+<!-- 			<div id="eighth_row" class="row">
 				<div id="timer_title">Timer</div>
 
 				<div id="minutes">
@@ -195,20 +201,21 @@
 					<div id="num_secs"><input></input> secs Left</div>
 				</div>
 				
-			</div>
+			</div> -->
 		</div>
-
-		<div id="pie_timer">hello</div>
-		<div id="timeplz">Seconds Elapsed: 0</div>
-		<div class="time_reset">Reset Time</div>
-
-		<div id="keyboard_shortcuts">
-<!-- 			<ul>
+		<div id="timer">
+			<div id="pie_timer">Timer: </div>
+			<div id="timeplz">Seconds Elapsed: 0</div>
+			<div class="time_reset">Reset Time</div>	
+		</div>
+		
+<!-- 		<div id="keyboard_shortcuts">
+			<ul>
 				<li>Increment bpm by 1: Up Arrow</li>
 				<li>Decrement bpm by 1: Down Arrow</li>
 				<li>Start/Stop metronome: Spacebar</li>
-			</ul> -->
-		</div>
+			</ul>
+		</div> -->
 	</body>
 </html>
 
