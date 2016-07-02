@@ -52,9 +52,6 @@ body {
 }
 
 /*second row*/
-#tempo_slider {
-
-}
 
 /*third row*/
 #time_sig {
@@ -113,10 +110,6 @@ body {
 	font-size: 20px
 }
 
-#volume_slider {
-
-}
-
 /*Seventh Row*/
 #beat_count {
 	font-size: 40px;
@@ -134,17 +127,6 @@ body {
 }
 
 /*Eighth Row*/
-/*#timer_title {
-	font-size: 25px;
-}
-
-#minutes {
-	display: inline-block;
-}
-
-#seconds {
-	display: inline-block;
-}*/
 
 #timeplz {
 	display: inline-block;
@@ -162,6 +144,20 @@ body {
 	color: white;
 	text-align: center;
 }
+
+/*#timer_title {
+	font-size: 25px;
+}
+
+#minutes {
+	display: inline-block;
+}
+
+#seconds {
+	display: inline-block;
+}*/
+
+/*General*/
 
 .dropdown {
 	margin-top: 5px;
