@@ -17,8 +17,7 @@ body {
 	border-width: 2px;
 }*/
 
-/*first row*/
-#tempo_row {
+#tempo_card {
 	color: white;
 }
 
@@ -51,9 +50,6 @@ body {
 	color: black;
 }
 
-/*second row*/
-
-/*third row*/
 #time_sig {
 	display: inline-block;
 }
@@ -101,7 +97,8 @@ body {
 	font-size: 15px;
 	background-color: black;
 	color: white;
-	display: inline-block;
+	/*display: inline-block;*/
+	width: 140px;
 }
 
 

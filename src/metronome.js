@@ -8,7 +8,7 @@ var metronome = {
 	current_timeout: 60000,
 	subdivision: 1,
 	increment_interval: 1,
-	bar_number: 0,
+	bar_number: 1,
 	time_sig: [4, 4],
 	first_beat_accent: true,
 	hi_sound: new Audio('Sounds/Clave/hiclave.wav'),
