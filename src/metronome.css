@@ -5,20 +5,96 @@ body {
 	padding-left: 30px;
 }
 
-#metronome {
-	padding: 0 40px 0 40px;
-	display: inline-block;
-	width: 100%;
-}
-
 /*.button:active {
 	border-style: solid;
 	border-color: gray;
 	border-width: 2px;
 }*/
 
-#tempo_card {
+/*General*/
+
+.dropdown {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.slider {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 150px;
+}
+
+
+/* Redesign */
+
+.container {
+	width: 90%;
+	margin-right: 30%;
+	box-sizing: border-box;
+}
+
+.wrapping_card {
+	border-radius: 0.5em;
+	border-style: solid;
+	margin-bottom: 20px;	
+}
+
+/* First card */
+
+#status_card {
+
+}
+
+#bar_counter {
+	display: inline-block;
+	width: 25%;
+	height: 100%;
+}
+
+#beat_count {
+	display: inline-block;
+	width: 40%;
+	height: 100%;
+}
+
+#timer {
+	display: inline-block;
+	width: 25%;
+	height: 100%;
+}
+
+#timeplz {
+	font-size: 60%;
+}
+
+#pie_timer {
+	font-size: 70%;
+}
+
+.time_reset {
+	padding: 10px 10px 10px 10px;
+	background-color: black;
+	font-size: 15px;
 	color: white;
+	text-align: center;
+}
+
+/* Second card */
+
+#settings_config_row {
+
+}
+
+.individual_card {
+	border-radius: 0.25em;
+	border-style: dotted;
+	margin: 5px;
+	width: 30%;
+	display: inline-block;
+}
+
+#tempo_card {
+	
 }
 
 #bpm {
@@ -29,7 +105,7 @@ body {
 	display: inline-block;
 }
 
-#increment_bpm {
+#tempo_slider {
 	display: inline-block;
 }
 
@@ -74,7 +150,6 @@ body {
 	display: inline-block;
 }
 
-/*Fourth Row*/
 #beat_subdiv {
 	display: inline-block;
 }
@@ -102,12 +177,15 @@ body {
 }
 
 
-/*Sixth Row*/
+
+/* Last card */
+
+
 #volume {
-	font-size: 20px
+	font-size: 20px;
+	display: inline-block;
 }
 
-/*Seventh Row*/
 #beat_count {
 	font-size: 40px;
 	padding: 15px 35px 5px;
@@ -123,46 +201,4 @@ body {
 	display: inline-block;
 }
 
-/*Eighth Row*/
-
-#timeplz {
-	display: inline-block;
-}
-
-#pie_timer {
-	display: inline-block;
-}
-
-.time_reset {
-	padding: 10px 10px 10px 10px;
-	width: 20%;
-	background-color: black;
-	font-size: 15px;
-	color: white;
-	text-align: center;
-}
-
-/*#timer_title {
-	font-size: 25px;
-}
-
-#minutes {
-	display: inline-block;
-}
-
-#seconds {
-	display: inline-block;
-}*/
-
-/*General*/
-
-.dropdown {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-.slider {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
 

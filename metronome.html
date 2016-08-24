@@ -45,7 +45,7 @@
 		</nav>
 
 		<div class="container">
-			<div id="status" class="row">
+			<div id="status_card" class="row wrapping_card">
 				<!-- Bar Counter -->
 				<div id="bar_counter">
 					Bar Counter: 1
@@ -56,40 +56,39 @@
 				</div>
 
 				<div id="timer">
-					<div id="pie_timer">Timer: </div>
-					<div id="timeplz">Seconds Elapsed: 0</div>
+					<div id="pie_timer">Timer: <span id="timeplz">Seconds Elapsed: 0</span></div>
+					
 					<div class="time_reset">Reset Time</div>	
 				</div>
 			</div>
 
-			<div id="settings_config" class="row">
+			<div id="settings_config_row" class="row wrapping_card">
 				<!-- Tempo -->
-				<div id="tempo_card" class=".col-md-4">
+				<div id="tempo_card" class=".col-md-4 individual_card">
 					<div id="bpm">
 						100 bpm
 					</div>
 
-					<div id="increment_bpm" class="button">
-						<!-- Increase Tempo (+ sign) -->
-						<div id="inc_tempo">
-							+
-						</div>
-						<!-- Decrease Tempo (- sign) -->
-						<div id="dec_tempo" class="button">
-							-
-						</div>
-
-						<input type="number" id="increment_interval" value="1" min="1" max="100"></input>
+					<!-- Increase Tempo (+ sign) -->
+					<div id="inc_tempo">
+						+
 					</div>
 
 					<!-- Tempo Slider -->
 					<div id="tempo_slider" class="html_slider">
 						<input id="tempo_slider" data-slider="true" data-slider-range="10,250" value="100">
 					</div>
+
+					<!-- Decrease Tempo (- sign) -->
+					<div id="dec_tempo" class="button">
+						-
+					</div>
+
+					<input type="number" id="increment_interval" value="1" min="1" max="100"></input>
 				</div>
 
 				<!-- Time Signature -->
-				<div id="time_sig_card" class=".col-md-4">
+				<div id="time_sig_card" class=".col-md-4 individual_card">
 					<div id="time_sig">
 						Time Signature
 					</div>
@@ -141,7 +140,7 @@
 				</div>
 
 				<!-- Beat Subdivision -->
-				<div id="beat_subdiv_card" class=".col-md-4">
+				<div id="beat_subdiv_card" class=".col-md-4 individual_card">
 					<div id="beat_subdiv">Beat Subdivision</div>
 
 					<div id="beat_subdiv_menu" class="dropdown">
@@ -170,9 +169,17 @@
 
 			</div>
 
-			<div id="start_and_volume" class="row">
+			<div id="start_and_volume" class="row wrapping_card">
 				<div id="start_button" class="button">
 					Start
+				</div>
+
+				<div id="volume">
+					<div id="volume">Volume
+						<div id="volume_slider" class="html_slider">
+							<input id="vol_slider" type="text" data-slider="true" data-slider-range="0,100" value="50">
+						</div>
+					</div>
 				</div>
 
 				<div id="sounds">
@@ -186,13 +193,6 @@
 						  	<li><a href="#" id="click" class="sounds">Click</a></li>
 							<li><a href="#" id="cowbell" class="sounds">Cowbell</a></li>
 						</ul>
-					</div>
-				</div>
-
-				<div id="volume">
-					<div id="volume">Volume</div>
-					<div id="volume_slider" class="html_slider">
-						<input id="vol_slider" type="text" data-slider="true" data-slider-range="0,100" value="50">
 					</div>
 				</div>
 
