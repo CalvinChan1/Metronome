@@ -1,5 +1,5 @@
 body {
-	font-size: 25px;
+	/*font-size: 25px;*/
 	font-family: helvetica;
 	font-weight: bold;
 	padding-left: 30px;
@@ -39,8 +39,7 @@ body {
 	margin-bottom: 20px;	
 }
 
-/* First card */
-
+/* ~~ First row ~~ */
 #status_card {
 
 }
@@ -64,11 +63,11 @@ body {
 }
 
 #timeplz {
-	font-size: 60%;
+	/*font-size: 60%;*/
 }
 
 #pie_timer {
-	font-size: 70%;
+	/*font-size: 70%;*/
 }
 
 .time_reset {
@@ -79,7 +78,7 @@ body {
 	text-align: center;
 }
 
-/* Second card */
+/* ~~ Second row ~~ */
 
 #settings_config_row {
 
@@ -87,12 +86,14 @@ body {
 
 .individual_card {
 	border-radius: 0.25em;
-	border-style: dotted;
+	border-style: solid;
+	border-width: 2px;
 	margin: 5px;
 	width: 30%;
 	display: inline-block;
 }
 
+/* First card */
 #tempo_card {
 	
 }
@@ -102,7 +103,6 @@ body {
 	border: none;
 	padding: 15px 35px;
 	text-align: center;
-	display: inline-block;
 }
 
 #tempo_slider {
@@ -110,13 +110,13 @@ body {
 }
 
 #inc_tempo {
-	padding: 15px 35px;
+	padding: 15px;
 	background-color: black;
 	display: inline-block;
 }
 
 #dec_tempo {
-	padding: 15px 35px;
+	padding: 15px;
 	background-color: black;
 	display: inline-block;
 }
@@ -124,14 +124,16 @@ body {
 #increment_interval {
 	width: 55px;
 	color: black;
+	display: block;
 }
 
+/* Second card */
 #time_sig {
 	display: inline-block;
 }
 
 #time_sig_menu {
-	padding: 25px;
+	padding: 20px;
 	background-color: green;
 	font-size: 25px;
 	display: inline-block;
@@ -146,43 +148,70 @@ body {
 	display: inline-block;
 }
 
-#bar_counter {
+#first_beat_accent {
+	padding: 25px 15px;
+	font-size: 15px;
+	background-color: black;
+	color: white;
+	width: 140px;
+}
+
+/* Third card */
+.beat-subdiv-icon {
+	padding: 10px;
+	background-color: red;
+	margin: 10%
+}
+
+#quarter-notes {
+	background-color: green;
 	display: inline-block;
 }
 
-#beat_subdiv {
+.eighths {
+	background-color: blue;
 	display: inline-block;
+}
+
+#triplets {
+	background-color: orange;
+	display: inline-block;
+}
+
+.sixteenths {
+	background-color: grey;
+	display: inline-block;	
+}
+
+#beat_subdiv {
+	display: block;
 }
 
 #beat_subdiv_menu {
 	display: inline-block;
 }
 
-/*Fifth Row */
+
+
+/* ~~ Third row ~~ */
+#start_button {
+	padding: 25px 55px;
+	font-size: 15px;
+	background-color: black;
+	color: white;
+	display: inline-block;
+}
+
+#volume {
+	font-size: 20px;
+	display: inline-block;
+}
+
 #sounds {
 	display: inline-block;
 }
 
-#sound_pack {
-	display: inline-block;
-}
-
-#first_beat_accent {
-	padding: 25px 15px;
-	font-size: 15px;
-	background-color: black;
-	color: white;
-	/*display: inline-block;*/
-	width: 140px;
-}
-
-
-
-/* Last card */
-
-
-#volume {
-	font-size: 20px;
+#sound_icons {
 	display: inline-block;
 }
 
@@ -192,13 +221,4 @@ body {
 	display: inline-block;
 	text-align: center;
 }
-
-#start_button {
-	padding: 25px 55px;
-	font-size: 15px;
-	background-color: black;
-	color: white;
-	display: inline-block;
-}
-
 

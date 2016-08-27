@@ -69,22 +69,20 @@
 						100 bpm
 					</div>
 
-					<!-- Increase Tempo (+ sign) -->
-					<div id="inc_tempo">
-						+
-					</div>
+					<!-- This needs to be placed into a gear: http://iconmonstr.com/gear-1/ -->
+					<input type="number" id="increment_interval" value="1" min="1" max="100"></input>
 
-					<!-- Tempo Slider -->
-					<div id="tempo_slider" class="html_slider">
-						<input id="tempo_slider" data-slider="true" data-slider-range="10,250" value="100">
-					</div>
-
-					<!-- Decrease Tempo (- sign) -->
 					<div id="dec_tempo" class="button">
 						-
 					</div>
 
-					<input type="number" id="increment_interval" value="1" min="1" max="100"></input>
+					<div id="tempo_slider" class="html_slider">
+						<input id="tempo_slider" data-slider="true" data-slider-range="10,250" value="100">
+					</div>
+
+					<div id="inc_tempo">
+						+
+					</div>
 				</div>
 
 				<!-- Time Signature -->
@@ -94,54 +92,22 @@
 					</div>
 
 					<div id="time_sig_menu">
-						<div id="numerator" class="dropdown">
-							<button class="btn btn-primary dropdown-toggle numerator-dropdown" type="button" data-toggle="dropdown">
-								4
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu numerator">
-							  	<li><a href="#" id="2">2</a></li>
-							  	<li><a href="#" id="3">3</a></li>
-							  	<li><a href="#" id="4">4</a></li>
-							  	<li><a href="#" id="5">5</a></li>
-							  	<li><a href="#" id="6">6</a></li>
-							  	<li><a href="#" id="7">7</a></li>
-							  	<li><a href="#" id="8">8</a></li>
-							  	<li><a href="#" id="9">9</a></li>
-							  	<li><a href="#" id="10">10</a></li>
-							  	<li><a href="#" id="11">11</a></li>
-							  	<li><a href="#" id="12">12</a></li>
-							  	<li><a href="#" id="13">13</a></li>
-							  	<li><a href="#" id="14">14</a></li>
-							  	<li><a href="#" id="15">15</a></li>
-							  	<li><a href="#" id="16">16</a></li>
-							  	<li><a href="#" id="17">17</a></li>
-							  	<li><a href="#" id="18">18</a></li>
-							</ul>
-						</div>
+						<input type="number" id="numerator" value="4" min="2" max="25" required>
 						/
-						<div id="denominator" class="dropdown">
-							<button class="btn btn-primary dropdown-toggle denominator-dropdown" type="button" data-toggle="dropdown">
-								4
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu denominator">
-								<li><a href="#" id="2">2</a></li>
-								<li><a href="#" id="4">4</a></li>
-								<li><a href="#" id="8">8</a></li>
-								<li><a href="#" id="16">16</a></li>
-							</ul>
-						</div>
+						<input type="number" id="denominator" value="4" min="2" max="16" required>
 					</div>
 
-					<div id="first_beat_accent" class="button">
-						1st beat accent
-					</div>
+					<input id="first_beat_accent" type="checkbox">1st beat accent<br>
 				</div>
 
 				<!-- Beat Subdivision -->
 				<div id="beat_subdiv_card" class=".col-md-4 individual_card">
 					<div id="beat_subdiv">Beat Subdivision</div>
+
+					<div id="quarter-notes" class="beat-subdiv-icon subdivision" data-subdivision="1" data-name="Quarter Notes">Q</div>
+					<div id="8th-notes" class="beat-subdiv-icon eighths subdivision" data-subdivision="2" data-name="Eighth Notes">E</div>
+					<div id="triplets" class="beat-subdiv-icon subdivision" data-subdivision="3" data-name="Triplets">T</div>
+					<div id="16th-notes" class="beat-subdiv-icon sixteenths subdivision" data-subdivision="4" data-name="16th Notes">S</div>
 
 					<div id="beat_subdiv_menu" class="dropdown">
 						<button class="btn btn-primary dropdown-toggle subdivison-dropdown" 
@@ -151,18 +117,18 @@
 						</button>
 						<ul class="dropdown-menu">
 							<!-- Icons needed for these -->
-						  	<li><a href="#" id="quarter-notes" class="subdivision" data-subdivision="1">Quarter Notes</a></li>
+<!-- 						  	<li><a href="#" id="quarter-notes" class="subdivision" data-subdivision="1">Quarter Notes</a></li>
 						  	<li><a href="#" id="8th-notes" class="subdivision" data-subdivision="2">8th Notes</a></li>
 						  	<li><a href="#" id="triplets" class="subdivision" data-subdivision="3">Triplets</a></li>
-						  	<li><a href="#" id="16th-notes" class="subdivision" data-subdivision="4">16th Notes</a></li>
+						  	<li><a href="#" id="16th-notes" class="subdivision" data-subdivision="4">16th Notes</a></li> -->
 
 						  	<!-- These belong in the dropdown -->
-						  	<li><a href="#" id="sextuplets" class="subdivision" data-subdivision="6">16th Note Triplets</a></li>
-						  	<li><a href="#" id="32nd-notes" class="subdivision" data-subdivision="8">32nd Notes</a></li>
-						  	<li><a href="#" id="whole-notes" class="subdivision" data-subdivision="0.25">Whole Notes</a></li>
-						  	<li><a href="#" id="half-notes" class="subdivision" data-subdivision="0.5">Half Notes</a></li>
-						  	<li><a href="#" id="quintuplets" class="subdivision" data-subdivision="5">Quintuplets</a></li>
-						  	<li><a href="#" id="septuplets" class="subdivision" data-subdivision="7">Septuplets</a></li>
+						  	<li><a href="#" id="sextuplets" class="subdivision" data-subdivision="6" data-name="16th Note Triplets">16th Note Triplets</a></li>
+						  	<li><a href="#" id="32nd-notes" class="subdivision" data-subdivision="8" data-name="32nd Notes">32nd Notes</a></li>
+						  	<li><a href="#" id="whole-notes" class="subdivision" data-subdivision="0.25" data-name="Whole Notes">Whole Notes</a></li>
+						  	<li><a href="#" id="half-notes" class="subdivision" data-subdivision="0.5" data-name="Half Notes">Half Notes</a></li>
+						  	<li><a href="#" id="quintuplets" class="subdivision" data-subdivision="5" data-name="Quintuplets">Quintuplets</a></li>
+						  	<li><a href="#" id="septuplets" class="subdivision" data-subdivision="7" data-name="Septuplets">Septuplets</a></li>
 						</ul>
 					</div>
 				</div>
@@ -185,6 +151,14 @@
 				<div id="sounds">
 					<div id="sounds">Sounds</div>
 
+					<!-- Need to add icons -->
+					<div id="sound_icons">
+						<div id="clave" class="sounds"></div>
+						<div id="click" class="sounds"></div>
+						<div id="cowbell" class="sounds"></div>
+						<div id="voice" class="sounds"></div>
+					</div>
+
 					<div id="sound_pack" class="dropdown">
 						<button class="btn btn-primary dropdown-toggle sound-dropdown" type="button" data-toggle="dropdown">Clave
 						<span class="caret"></span></button>
@@ -195,32 +169,8 @@
 						</ul>
 					</div>
 				</div>
-
 			</div>
 		</div>
-
-<!--  		
-		Extras
-		<div id="eighth_row" class="row">
-			<div id="timer_title">Timer</div>
-
-			<div id="minutes">
-				<div id="num_mins"><input></input> mins</div>
-			</div>
-
-			<div id="seconds">
-				<div id="num_secs"><input></input> secs Left</div>
-			</div>
-
-			<div id="keyboard_shortcuts">
-				<ul>
-					<li>Increment bpm by 1: Up Arrow</li>
-					<li>Decrement bpm by 1: Down Arrow</li>
-					<li>Start/Stop metronome: Spacebar</li>
-				</ul>
-			</div>
-		</div>
- -->
 	</body>
 </html>
 

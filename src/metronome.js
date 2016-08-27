@@ -115,45 +115,45 @@ var metronome = {
 	},
 	time_sig_change: function(num, den) {
 		if (num) {
-			$(".numerator-dropdown").html(num + ' <span class="caret"></span>');
+			// $(".numerator-dropdown").html(num + ' <span class="caret"></span>');
 			this.time_sig[0] = num;
 		} else {
-			$(".denominator-dropdown").html(den + ' <span class="caret"></span>');
+			// $(".denominator-dropdown").html(den + ' <span class="caret"></span>');
 			this.time_sig[1] = den;
 
-			function hide_or_show_subdivision_options(show_or_hide) {
-				var subdivisions = [$('#quarter-notes'), $('#triplets'),
-									$('#whole-notes'), $('#half-notes'),
-									$('#quintuplets'), $('#septuplets')]
+			// function hide_or_show_subdivision_options(show_or_hide) {
+			// 	var subdivisions = [$('#quarter-notes'), $('#triplets'),
+			// 						$('#whole-notes'), $('#half-notes'),
+			// 						$('#quintuplets'), $('#septuplets')]
 
-				for (var i = 0; i < subdivisions.length; i++) {
-					show_or_hide === "show" ? subdivisions[i].show() : subdivisions[i].hide();
-				}
-			}
+			// 	for (var i = 0; i < subdivisions.length; i++) {
+			// 		show_or_hide === "show" ? subdivisions[i].show() : subdivisions[i].hide();
+			// 	}
+			// }
 
 			if (den === 2) {
 				this.current_timeout = 120000;
-				hide_or_show_subdivision_options("hide");
-				$('#quarter-notes').show();
+				// hide_or_show_subdivision_options("hide");
+				// $('#quarter-notes').show();
 			} else if (den === 4) {
 				this.current_timeout = 60000;
-				hide_or_show_subdivision_options("show");
+				// hide_or_show_subdivision_options("show");
 			} else if (den === 8) {
 				this.current_timeout = 30000;
-				$(".subdivison-dropdown").html('8th Notes <span class="caret"></span>');
-				hide_or_show_subdivision_options("hide");
+				// $(".subdivison-dropdown").html('8th Notes <span class="caret"></span>');
+				// hide_or_show_subdivision_options("hide");
 			} else if (den === 16) {
 				this.current_timeout = 15000;
-				hide_or_show_subdivision_options("hide");
-				$(".subdivison-dropdown").html('16th Notes <span class="caret"></span>');
-				$('#8th-notes').hide();
-				$('#sextuplets').hide();
+				// hide_or_show_subdivision_options("hide");
+				// $(".subdivison-dropdown").html('16th Notes <span class="caret"></span>');
+				// $('#8th-notes').hide();
+				// $('#sextuplets').hide();
 			}
 		}
 		this.reset_current_beat();
 	},
 	beat_subdivision: function(subdivision) {
-		subdivision_name = $("ul").find("[data-subdivision='" + subdivision + "']").html();
+		subdivision_name = $(document).find("[data-subdivision='" + subdivision + "']").data("name");
 
 		$(".subdivison-dropdown").html(subdivision_name + ' <span class="caret"></span>');
 		this.subdivision = subdivision;
@@ -228,28 +228,38 @@ $(document).ready(function() {
 	});
 
 	// Beats
-	var $numerator = $(".numerator"),
-		$denominator = $(".denominator");
+	var $numerator = $("#numerator"),
+		$denominator = $("#denominator");
 
-	function numerator_click_handler(numerator) {
-		$numerator.find("#" + numerator).click(function() {
-			metronome.time_sig_change(numerator, false);
-		});
-	}
+	$numerator.on('input', function() {
+		metronome.time_sig_change(parseInt($(this).val()), false);
+		console.log(metronome.time_sig);
+	})
 
-	function denominator_click_handler(denominator) {
-		$denominator.find("#" + denominator).click(function() {
-			metronome.time_sig_change(false, denominator);
-		});
-	}
+	$denominator.on('input', function() {
+		console.log($(this).val())
+		metronome.time_sig_change(false, parseInt($(this).val()));
+	})
 
-	for (var i = 0; i < 18; i++) {
-		numerator_click_handler(i);
-	}
+	// function numerator_click_handler(numerator) {
+		// $numerator.find("#" + numerator).click(function() {
+		// 	metronome.time_sig_change(numerator, false);
+		// });
+	// }
 
-	for (var j = 1; j < 5; j++) {
-		denominator_click_handler(Math.pow(2, j));
-	}
+	// function denominator_click_handler(denominator) {
+		// $denominator.find("#" + denominator).click(function() {
+		// 	metronome.time_sig_change(false, denominator);
+		// });
+	// }
+
+	// for (var i = 0; i < 18; i++) {
+	// 	numerator_click_handler(i);
+	// }
+
+	// for (var j = 1; j < 5; j++) {
+	// 	denominator_click_handler(Math.pow(2, 	j));
+	// }
 
 	// Subdivisions' event handlers
 	var subdivisions_ids = ["#quarter-notes", "#8th-notes",
@@ -260,6 +270,7 @@ $(document).ready(function() {
 
 	function add_subdivision_click_handler(subdiv_id) {
 		$(subdiv_id).click(function() {
+			console.log("asd");
 			var subdiv_number = $(subdiv_id).data("subdivision")
 			metronome.beat_subdivision(subdiv_number);
 		})
@@ -317,8 +328,9 @@ $(document).ready(function() {
 	}
 	
 	// First Beat Accent button
-	$("#first_beat_accent").click(function() {
-		metronome.first_beat_accent = metronome.first_beat_accent ? false : true;
+	var $first_beat_accent = $("#first_beat_accent");
+	$first_beat_accent.click(function() {
+		metronome.first_beat_accent = $first_beat_accent.is(':checked')
 	});
 
 	// Sliders
